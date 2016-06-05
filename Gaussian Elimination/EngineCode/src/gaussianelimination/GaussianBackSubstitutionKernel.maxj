@@ -1,0 +1,43 @@
+/**
+ * MaxFile name: GaussianEliminationKernel
+ * Summary:
+ * 	Solves linear equation using Gaussian Elimination
+ */
+package gaussianelimination;
+
+import com.maxeler.maxcompiler.v2.kernelcompiler.Kernel;
+import com.maxeler.maxcompiler.v2.kernelcompiler.KernelParameters;
+//import com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream.OffsetExpr;
+import com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar;
+import com.maxeler.maxcompiler.v2.kernelcompiler.types.composite.DFEVector;
+import com.maxeler.maxcompiler.v2.kernelcompiler.types.composite.DFEVectorType;
+
+class GaussianBackSubstitutionKernel extends Kernel {
+
+	GaussianBackSubstitutionKernel(KernelParameters parameters, int vectorSize) {
+		super(parameters);
+		
+		DFEVectorType<DFEVar> vectorType =
+			new DFEVectorType<DFEVar>(dfeFloat(8, 24), vectorSize);
+
+		// Input
+		DFEVector<DFEVar> inVector = io.input("inVector", vectorType);
+		DFEVector<DFEVar> inVector1 = io.input("inVector1", vectorType);
+
+		// Explicitly double each vector element
+		DFEVector<DFEVar> reducedVector =
+			vectorType.newInstance(this);
+
+		//for (int i = 0; i < 3; i++)
+		//	reducedVector[i] <== (inVector[0]/inVector1[0])*inVector1[i];
+		
+		
+		reducedVector = (inVector[0]/inVector1[0])*inVector1;
+		reducedVector = reducedVector - inVector;
+
+
+		//Output
+		io.output("outVector", reducedVector, vectorType);
+		
+	}
+}

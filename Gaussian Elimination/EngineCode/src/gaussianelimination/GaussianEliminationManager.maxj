@@ -1,0 +1,29 @@
+/**
+ * MaxFile name: GaussianEliminationManager
+ * Summary:
+ * 	Manager for the three point moving average kernel design.
+ *  All IO is between the CPU and the DFE.
+ */
+package gaussianelimination;
+
+import com.maxeler.maxcompiler.v2.build.EngineParameters;
+import com.maxeler.maxcompiler.v2.kernelcompiler.Kernel;
+import com.maxeler.maxcompiler.v2.managers.standard.Manager;
+import com.maxeler.maxcompiler.v2.managers.standard.Manager.IOType;
+
+class GaussianEliminationManager {
+    private static int vectorSize = 4;
+	public static void main(String[] args) {
+		EngineParameters params = new EngineParameters(args);
+		Manager manager = new Manager(params);
+
+		// Instantiate the kernel
+		Kernel kernel = new GaussianEliminationKernel(manager.makeKernelParameters(), vectorSize);
+
+		manager.setKernel(kernel);
+		manager.addMaxFileConstant("vectorSize", vectorSize);
+		manager.setIO(IOType.ALL_CPU); // Connect all kernel ports to the CPU
+		manager.createSLiCinterface();
+		manager.build();
+	}
+}

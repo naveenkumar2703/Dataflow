@@ -1,0 +1,1511 @@
+#ifdef MAXCOMPILER_VERSION_INFO
+#define MAXCOMPILER_VERSION_INFO_PRESENT 1
+#define MAXFILE_MAXCOMPILER_VERSION_YEAR         2015
+#define MAXFILE_MAXCOMPILER_VERSION_NUM          2
+#define MAXFILE_MAXCOMPILER_VERSION_POINT        0
+#define MAXFILE_MAXCOMPILER_VERSION_PATCH        ""
+#define MAXFILE_MAXCOMPILER_VERSION_REV          46195
+#define MAXFILE_MAXCOMPILER_VERSION_RELEASE_DATE "2015-11-17"
+#define MAXFILE_MAXCOMPILER_VERSION_RELEASE_MODE true
+#endif
+
+#ifdef MAXFILE_BUILD_INFO
+#define MAXFILE_BUILD_INFO_PRESENT 1
+#define MAXFILE_BUILD_NAME "GaussianBackSubstitution"
+#define MAXFILE_BUILD_DIR  "/tmp/GaussianBackSubstitution_MAIA_DFE_SIM"
+#define MAXFILE_BUILD_DATE  20160604
+#define MAXFILE_BUILD_REV   1
+#endif
+
+#ifdef PARAM
+#define PARAM_PRESENT 1
+PARAM(vectorSize, 4)
+PARAM(APP_ID, 0)
+PARAM(REV_ID, 0)
+PARAM(CHAIN_LENGTH, 36)
+PARAM(IS_SIMULATION, 1)
+PARAM(MEC_SUPPORTED, 1)
+PARAM(PCIE_SLAVE_STREAMING, 0)
+PARAM(PCIE_ALIGNMENT, 16)
+PARAM(NUM_IFPGA_LINKS, 0)
+#endif
+
+#ifdef STRING_PARAM
+#define STRING_PARAM_PRESENT 1
+STRING_PARAM(BOARD_MODEL, "MAX4848A")
+#endif
+
+
+
+#ifdef INCLUDE_GENERATED_CPP_HEADERS
+#include "GaussianBackSubstitutionKernel.h"
+#endif
+
+
+
+
+
+
+
+
+
+
+#ifdef MANAGER_NODE
+#define MANAGER_NODE_PRESENT 1
+MANAGER_NODE(GaussianBackSubstitutionKernel, Kernel)
+MANAGER_NODE(inVector, PCIe_From_Host)
+MANAGER_NODE(inVector1, PCIe_From_Host)
+MANAGER_NODE(outVector, PCIe_To_Host)
+MANAGER_NODE(Stream_1, Fifo)
+MANAGER_NODE(Stream_4, Fifo)
+MANAGER_NODE(Stream_9, Fifo)
+#endif
+
+#ifdef MANAGER_NODE_IO
+#define MANAGER_NODE_IO_PRESENT 1
+MANAGER_NODE_IO(GaussianBackSubstitutionKernel, inVector, IN, STREAM, 128, PULL)
+MANAGER_NODE_IO(GaussianBackSubstitutionKernel, inVector1, IN, STREAM, 128, PULL)
+MANAGER_NODE_IO(GaussianBackSubstitutionKernel, outVector, OUT, STREAM, 128, PUSH)
+MANAGER_NODE_IO(inVector, inVector, OUT, PCIE, 128, PUSH)
+MANAGER_NODE_IO(inVector1, inVector1, OUT, PCIE, 128, PUSH)
+MANAGER_NODE_IO(outVector, outVector, IN, PCIE, 128, PUSH)
+MANAGER_NODE_IO(Stream_1, input, IN, PCIE, 128, PUSH)
+MANAGER_NODE_IO(Stream_1, output, OUT, STREAM, 128, PULL)
+MANAGER_NODE_IO(Stream_4, input, IN, PCIE, 128, PUSH)
+MANAGER_NODE_IO(Stream_4, output, OUT, STREAM, 128, PULL)
+MANAGER_NODE_IO(Stream_9, input, IN, STREAM, 128, PUSH)
+MANAGER_NODE_IO(Stream_9, output, OUT, PCIE, 128, PUSH)
+#endif
+
+#ifdef MANAGER_STREAM
+#define MANAGER_STREAM_PRESENT 1
+MANAGER_STREAM(inVector, inVector, Stream_1, input, 128)
+MANAGER_STREAM(inVector1, inVector1, Stream_4, input, 128)
+MANAGER_STREAM(GaussianBackSubstitutionKernel, outVector, Stream_9, input, 128)
+MANAGER_STREAM(Stream_1, output, GaussianBackSubstitutionKernel, inVector, 128)
+MANAGER_STREAM(Stream_4, output, GaussianBackSubstitutionKernel, inVector1, 128)
+MANAGER_STREAM(Stream_9, output, outVector, outVector, 128)
+#endif
+
+#ifdef MANAGER_NODE_STACK_TRACE
+#define MANAGER_NODE_STACK_TRACE_PRESENT 1
+MANAGER_NODE_STACK_TRACE(GaussianBackSubstitutionKernel, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+MANAGER_NODE_STACK_TRACE(inVector, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+MANAGER_NODE_STACK_TRACE(inVector1, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+MANAGER_NODE_STACK_TRACE(outVector, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+MANAGER_NODE_STACK_TRACE(Stream_1, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+MANAGER_NODE_STACK_TRACE(Stream_4, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+MANAGER_NODE_STACK_TRACE(Stream_9, "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+#endif
+
+
+#ifdef MANAGER_NODE_PROPERTY
+#define MANAGER_NODE_PROPERTY_PRESENT 1
+MANAGER_NODE_PROPERTY(GaussianBackSubstitutionKernel, control_pipelining_depth, 2)
+#endif
+
+
+#ifdef KERNEL_CORE
+#define KERNEL_CORE_PRESENT 1
+KERNEL_CORE(GaussianBackSubstitutionKernel)
+#endif
+
+#ifdef KERNEL_HOST_CONTROLLED
+#define KERNEL_HOST_CONTROLLED_PRESENT 1
+KERNEL_HOST_CONTROLLED(GaussianBackSubstitutionKernel, GaussianBackSubstitutionKernel)
+#endif
+
+#ifdef DEBUG_INPUT_BITS
+#define DEBUG_INPUT_BITS_PRESENT 1
+DEBUG_INPUT_BITS(GaussianBackSubstitutionKernel, inVector, 0)
+DEBUG_INPUT_BITS(GaussianBackSubstitutionKernel, inVector1, 1)
+#endif
+
+#ifdef DEBUG_OUTPUT_BITS
+#define DEBUG_OUTPUT_BITS_PRESENT 1
+DEBUG_OUTPUT_BITS(GaussianBackSubstitutionKernel, outVector, 0)
+#endif
+
+#ifdef MANAGER_NODE_CPP_SIM_MODEL_CTOR
+#define MANAGER_NODE_CPP_SIM_MODEL_CTOR_PRESENT 1
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(inVector, PCIePushSourceSyncMax4, "inVector")
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(inVector1, PCIePushSourceSyncMax4, "inVector1")
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_1, FifoPushToPullSync, "Stream_1", false, 512, 128)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_4, FifoPushToPullSync, "Stream_4", false, 512, 128)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(GaussianBackSubstitutionKernel, GaussianBackSubstitutionKernel, "GaussianBackSubstitutionKernel")
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(Stream_9, FifoPushToPushSync, "Stream_9", false, 512, 128)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(outVector, PCIePushSinkSyncMax3, "outVector")
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(CapabilityReg, CapRegs, "CapabilityReg", 0, 2, 1, 0, 0, 0, 0, 0, 36)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(ifpga, IFPGARegs)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(sfa, SFARegs)
+MANAGER_NODE_CPP_SIM_MODEL_CTOR(ChecksumMemory, ChecksumMem, "ChecksumMemory", "4f2d8c6d8cbff7e3d15786dc44d3978e0577227e53f685e6dc17b6504140e114")
+#endif
+
+#ifdef MANAGER_NODE_CPP_SIM_MODEL_SETUP
+#define MANAGER_NODE_CPP_SIM_MODEL_SETUP_PRESENT 1
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(GaussianBackSubstitutionKernel, addDebugRegister, reg_dbg_ctld_almost_empty, 2, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(GaussianBackSubstitutionKernel, addDebugRegister, reg_dbg_ctld_done, 2, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(GaussianBackSubstitutionKernel, addDebugRegister, reg_dbg_ctld_empty, 2, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(GaussianBackSubstitutionKernel, addDebugRegister, reg_dbg_ctld_read, 2, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(GaussianBackSubstitutionKernel, addDebugRegister, reg_dbg_ctld_read_pipe_dbg, 6, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(GaussianBackSubstitutionKernel, addDebugRegister, reg_dbg_ctld_request, 2, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(GaussianBackSubstitutionKernel, addDebugRegister, reg_dbg_done_out, 1, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(GaussianBackSubstitutionKernel, addDebugRegister, reg_dbg_fill_level, 7, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(GaussianBackSubstitutionKernel, addDebugRegister, reg_dbg_flush_level, 7, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(GaussianBackSubstitutionKernel, addDebugRegister, reg_dbg_flush_start, 1, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(GaussianBackSubstitutionKernel, addDebugRegister, reg_dbg_flush_start_level, 7, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(GaussianBackSubstitutionKernel, addDebugRegister, reg_dbg_flushing, 1, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(GaussianBackSubstitutionKernel, addDebugRegister, reg_dbg_full_level, 7, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(GaussianBackSubstitutionKernel, addDebugRegister, reg_dbg_out_stall, 1, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(GaussianBackSubstitutionKernel, addDebugRegister, reg_dbg_out_valid, 1, 0)
+MANAGER_NODE_CPP_SIM_MODEL_SETUP(GaussianBackSubstitutionKernel, addDebugRegister, reg_dbg_stall_vector, 1, 0)
+#endif
+
+#ifdef PCIE_STREAM
+#define PCIE_STREAM_PRESENT 1
+PCIE_STREAM(inVector, STREAM_FROM_HOST, 0)
+PCIE_STREAM(inVector1, STREAM_FROM_HOST, 1)
+PCIE_STREAM(outVector, STREAM_TO_HOST, 0)
+#endif
+
+#ifdef REG
+#define REG_PRESENT 1
+REG(GaussianBackSubstitutionKernel.io_inVector_force_disabled, 0x0, 1, hwOffsetFix(1, 0, UNSIGNED))
+REG(GaussianBackSubstitutionKernel.io_inVector1_force_disabled, 0x1, 1, hwOffsetFix(1, 0, UNSIGNED))
+REG(GaussianBackSubstitutionKernel.io_outVector_force_disabled, 0x2, 1, hwOffsetFix(1, 0, UNSIGNED))
+REG(GaussianBackSubstitutionKernel.run_cycle_count, 0x3, 6, hwOffsetFix(48, 0, UNSIGNED))
+REG(GaussianBackSubstitutionKernel.current_run_cycle_count, 0x9, 6, hwOffsetFix(48, 0, UNSIGNED))
+REG(GaussianBackSubstitutionKernel.dbg_ctld_almost_empty, 0xf, 1, hwBits(2))
+REG(GaussianBackSubstitutionKernel.dbg_ctld_done, 0x10, 1, hwBits(2))
+REG(GaussianBackSubstitutionKernel.dbg_ctld_empty, 0x11, 1, hwBits(2))
+REG(GaussianBackSubstitutionKernel.dbg_ctld_read, 0x12, 1, hwBits(2))
+REG(GaussianBackSubstitutionKernel.dbg_ctld_read_pipe_dbg, 0x13, 1, hwBits(6))
+REG(GaussianBackSubstitutionKernel.dbg_ctld_request, 0x14, 1, hwBits(2))
+REG(GaussianBackSubstitutionKernel.dbg_done_out, 0x15, 1, hwBits(1))
+REG(GaussianBackSubstitutionKernel.dbg_fill_level, 0x16, 1, hwBits(7))
+REG(GaussianBackSubstitutionKernel.dbg_flush_level, 0x17, 1, hwBits(7))
+REG(GaussianBackSubstitutionKernel.dbg_flush_start, 0x18, 1, hwBits(1))
+REG(GaussianBackSubstitutionKernel.dbg_flush_start_level, 0x19, 1, hwBits(7))
+REG(GaussianBackSubstitutionKernel.dbg_flushing, 0x1a, 1, hwBits(1))
+REG(GaussianBackSubstitutionKernel.dbg_full_level, 0x1b, 1, hwBits(7))
+REG(GaussianBackSubstitutionKernel.dbg_out_stall, 0x1c, 1, hwBits(1))
+REG(GaussianBackSubstitutionKernel.dbg_out_valid, 0x1d, 1, hwBits(1))
+REG(GaussianBackSubstitutionKernel.dbg_stall_vector, 0x1e, 1, hwBits(1))
+REG(ifpga.ifpga_ctrl, 0x1f, 1, hwBits(8))
+REG(SignalForwardingAdapter.SFA_FORWARD_EN, 0x20, 4, hwBits(32))
+#endif
+
+#ifdef REG_V2
+#define REG_V2_PRESENT 1
+REG_V2(GaussianBackSubstitutionKernel.io_inVector_force_disabled, 0x0, 1, hwOffsetFix(1, 0, UNSIGNED), HOST_WRITE_ONLY, true)
+REG_V2(GaussianBackSubstitutionKernel.io_inVector1_force_disabled, 0x1, 1, hwOffsetFix(1, 0, UNSIGNED), HOST_WRITE_ONLY, true)
+REG_V2(GaussianBackSubstitutionKernel.io_outVector_force_disabled, 0x2, 1, hwOffsetFix(1, 0, UNSIGNED), HOST_WRITE_ONLY, true)
+REG_V2(GaussianBackSubstitutionKernel.run_cycle_count, 0x3, 6, hwOffsetFix(48, 0, UNSIGNED), HOST_WRITE_ONLY, false)
+REG_V2(GaussianBackSubstitutionKernel.current_run_cycle_count, 0x9, 6, hwOffsetFix(48, 0, UNSIGNED), HOST_READ_ONLY, false)
+REG_V2(GaussianBackSubstitutionKernel.dbg_ctld_almost_empty, 0xf, 1, hwBits(2), HOST_READ_ONLY, false)
+REG_V2(GaussianBackSubstitutionKernel.dbg_ctld_done, 0x10, 1, hwBits(2), HOST_READ_ONLY, false)
+REG_V2(GaussianBackSubstitutionKernel.dbg_ctld_empty, 0x11, 1, hwBits(2), HOST_READ_ONLY, false)
+REG_V2(GaussianBackSubstitutionKernel.dbg_ctld_read, 0x12, 1, hwBits(2), HOST_READ_ONLY, false)
+REG_V2(GaussianBackSubstitutionKernel.dbg_ctld_read_pipe_dbg, 0x13, 1, hwBits(6), HOST_READ_ONLY, false)
+REG_V2(GaussianBackSubstitutionKernel.dbg_ctld_request, 0x14, 1, hwBits(2), HOST_READ_ONLY, false)
+REG_V2(GaussianBackSubstitutionKernel.dbg_done_out, 0x15, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(GaussianBackSubstitutionKernel.dbg_fill_level, 0x16, 1, hwBits(7), HOST_READ_ONLY, false)
+REG_V2(GaussianBackSubstitutionKernel.dbg_flush_level, 0x17, 1, hwBits(7), HOST_READ_ONLY, false)
+REG_V2(GaussianBackSubstitutionKernel.dbg_flush_start, 0x18, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(GaussianBackSubstitutionKernel.dbg_flush_start_level, 0x19, 1, hwBits(7), HOST_READ_ONLY, false)
+REG_V2(GaussianBackSubstitutionKernel.dbg_flushing, 0x1a, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(GaussianBackSubstitutionKernel.dbg_full_level, 0x1b, 1, hwBits(7), HOST_READ_ONLY, false)
+REG_V2(GaussianBackSubstitutionKernel.dbg_out_stall, 0x1c, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(GaussianBackSubstitutionKernel.dbg_out_valid, 0x1d, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(GaussianBackSubstitutionKernel.dbg_stall_vector, 0x1e, 1, hwBits(1), HOST_READ_ONLY, false)
+REG_V2(ifpga.ifpga_ctrl, 0x1f, 1, hwBits(8), HOST_READ_WRITE, false)
+REG_V2(SignalForwardingAdapter.SFA_FORWARD_EN, 0x20, 4, hwBits(32), HOST_READ_WRITE, false)
+#endif
+
+
+
+
+#ifdef CHECKSUM
+#define CHECKSUM_PRESENT 1
+CHECKSUM("4f2d8c6d8cbff7e3d15786dc44d3978e0577227e53f685e6dc17b6504140e114")
+#endif
+
+
+
+
+#ifdef CAPABILITY
+#define CAPABILITY_PRESENT 1
+CAPABILITY(MAIAREV, MAIAREVA)
+CAPABILITY(MAIARAM, DDR3_48GB)
+CAPABILITY(MAIAFPGA, 5SGSMD8N2F45C2)
+#endif
+
+#ifdef DEFINE_DESIGN_NAME
+#define DESIGN_NAME GaussianBackSubstitution
+#endif /* DEFINE_DESIGN_NAME */
+
+#ifndef SLIC_NO_DECLARATIONS
+/**\file */
+#ifndef SLIC_DECLARATIONS_GaussianBackSubstitution_H
+#define SLIC_DECLARATIONS_GaussianBackSubstitution_H
+#include "MaxSLiCInterface.h"
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
+#define GaussianBackSubstitution_PCIE_ALIGNMENT (16)
+#define GaussianBackSubstitution_vectorSize (4)
+
+
+/*----------------------------------------------------------------------------*/
+/*---------------------------- Interface default -----------------------------*/
+/*----------------------------------------------------------------------------*/
+
+
+
+
+/**
+ * \brief Basic static function for the interface 'default'.
+ * 
+ * \param [in] param_N Interface Parameter "N".: Number of data items to process
+ * \param [in] instream_inVector The stream should be of size ((param_N * 4) * 4) bytes.
+ * \param [in] instream_inVector1 The stream should be of size ((param_N * 4) * 4) bytes.
+ * \param [out] outstream_outVector The stream should be of size ((param_N * 4) * 4) bytes.
+ */
+void GaussianBackSubstitution(
+	int32_t param_N,
+	const float *instream_inVector,
+	const float *instream_inVector1,
+	float *outstream_outVector);
+
+/**
+ * \brief Basic static non-blocking function for the interface 'default'.
+ * 
+ * Schedule to run on an engine and return immediately.
+ * The status of the run can be checked either by ::max_wait or ::max_nowait;
+ * note that one of these *must* be called, so that associated memory can be released.
+ * 
+ * 
+ * \param [in] param_N Interface Parameter "N".: Number of data items to process
+ * \param [in] instream_inVector The stream should be of size ((param_N * 4) * 4) bytes.
+ * \param [in] instream_inVector1 The stream should be of size ((param_N * 4) * 4) bytes.
+ * \param [out] outstream_outVector The stream should be of size ((param_N * 4) * 4) bytes.
+ * \return A handle on the execution status, or NULL in case of error.
+ */
+max_run_t *GaussianBackSubstitution_nonblock(
+	int32_t param_N,
+	const float *instream_inVector,
+	const float *instream_inVector1,
+	float *outstream_outVector);
+
+/**
+ * \brief Advanced static interface, structure for the engine interface 'default'
+ * 
+ */
+typedef struct { 
+	int32_t param_N; /**<  [in] Interface Parameter "N".: Number of data items to process */
+	const float *instream_inVector; /**<  [in] The stream should be of size ((param_N * 4) * 4) bytes. */
+	const float *instream_inVector1; /**<  [in] The stream should be of size ((param_N * 4) * 4) bytes. */
+	float *outstream_outVector; /**<  [out] The stream should be of size ((param_N * 4) * 4) bytes. */
+} GaussianBackSubstitution_actions_t;
+
+/**
+ * \brief Advanced static function for the interface 'default'.
+ * 
+ * \param [in] engine The engine on which the actions will be executed.
+ * \param [in,out] interface_actions Actions to be executed.
+ */
+void GaussianBackSubstitution_run(
+	max_engine_t *engine,
+	GaussianBackSubstitution_actions_t *interface_actions);
+
+/**
+ * \brief Advanced static non-blocking function for the interface 'default'.
+ *
+ * Schedule the actions to run on the engine and return immediately.
+ * The status of the run can be checked either by ::max_wait or ::max_nowait;
+ * note that one of these *must* be called, so that associated memory can be released.
+ *
+ * 
+ * \param [in] engine The engine on which the actions will be executed.
+ * \param [in] interface_actions Actions to be executed.
+ * \return A handle on the execution status of the actions, or NULL in case of error.
+ */
+max_run_t *GaussianBackSubstitution_run_nonblock(
+	max_engine_t *engine,
+	GaussianBackSubstitution_actions_t *interface_actions);
+
+/**
+ * \brief Group run advanced static function for the interface 'default'.
+ * 
+ * \param [in] group Group to use.
+ * \param [in,out] interface_actions Actions to run.
+ *
+ * Run the actions on the first device available in the group.
+ */
+void GaussianBackSubstitution_run_group(max_group_t *group, GaussianBackSubstitution_actions_t *interface_actions);
+
+/**
+ * \brief Group run advanced static non-blocking function for the interface 'default'.
+ * 
+ *
+ * Schedule the actions to run on the first device available in the group and return immediately.
+ * The status of the run must be checked with ::max_wait. 
+ * Note that use of ::max_nowait is prohibited with non-blocking running on groups:
+ * see the ::max_run_group_nonblock documentation for more explanation.
+ *
+ * \param [in] group Group to use.
+ * \param [in] interface_actions Actions to run.
+ * \return A handle on the execution status of the actions, or NULL in case of error.
+ */
+max_run_t *GaussianBackSubstitution_run_group_nonblock(max_group_t *group, GaussianBackSubstitution_actions_t *interface_actions);
+
+/**
+ * \brief Array run advanced static function for the interface 'default'.
+ * 
+ * \param [in] engarray The array of devices to use.
+ * \param [in,out] interface_actions The array of actions to run.
+ *
+ * Run the array of actions on the array of engines.  The length of interface_actions
+ * must match the size of engarray.
+ */
+void GaussianBackSubstitution_run_array(max_engarray_t *engarray, GaussianBackSubstitution_actions_t *interface_actions[]);
+
+/**
+ * \brief Array run advanced static non-blocking function for the interface 'default'.
+ * 
+ *
+ * Schedule to run the array of actions on the array of engines, and return immediately.
+ * The length of interface_actions must match the size of engarray.
+ * The status of the run can be checked either by ::max_wait or ::max_nowait;
+ * note that one of these *must* be called, so that associated memory can be released.
+ *
+ * \param [in] engarray The array of devices to use.
+ * \param [in] interface_actions The array of actions to run.
+ * \return A handle on the execution status of the actions, or NULL in case of error.
+ */
+max_run_t *GaussianBackSubstitution_run_array_nonblock(max_engarray_t *engarray, GaussianBackSubstitution_actions_t *interface_actions[]);
+
+/**
+ * \brief Converts a static-interface action struct into a dynamic-interface max_actions_t struct.
+ *
+ * Note that this is an internal utility function used by other functions in the static interface.
+ *
+ * \param [in] maxfile The maxfile to use.
+ * \param [in] interface_actions The interface-specific actions to run.
+ * \return The dynamic-interface actions to run, or NULL in case of error.
+ */
+max_actions_t* GaussianBackSubstitution_convert(max_file_t *maxfile, GaussianBackSubstitution_actions_t *interface_actions);
+
+/**
+ * \brief Initialise a maxfile.
+ */
+max_file_t* GaussianBackSubstitution_init(void);
+
+/* Error handling functions */
+int GaussianBackSubstitution_has_errors(void);
+const char* GaussianBackSubstitution_get_errors(void);
+void GaussianBackSubstitution_clear_errors(void);
+/* Free statically allocated maxfile data */
+void GaussianBackSubstitution_free(void);
+/* returns: -1 = error running command; 0 = no error reported */
+int GaussianBackSubstitution_simulator_start(void);
+/* returns: -1 = error running command; 0 = no error reported */
+int GaussianBackSubstitution_simulator_stop(void);
+
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
+#endif /* SLIC_DECLARATIONS_GaussianBackSubstitution_H */
+
+#endif /* SLIC_NO_DECLARATIONS */
+
+#ifdef PHOTON_NODE_DATA
+#define PHOTON_NODE_DATA_PRESENT 1
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 32, NodeInputMappedReg, "Scalar input (io_outVector_force_disabled)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:816)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:40)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 33, NodeNot, "~", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:816)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:40)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 0, NodeInputMappedReg, "Scalar input (io_inVector_force_disabled)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:24)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 1, NodeNot, "~", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:24)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 2, NodeInput, "Input(inVector)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:24)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 3, NodeSlice, "[31:0]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:24)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 4, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:24)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 11, NodeInputMappedReg, "Scalar input (io_inVector1_force_disabled)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:25)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 12, NodeNot, "~", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:25)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 13, NodeInput, "Input(inVector1)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:25)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 14, NodeSlice, "[31:0]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:25)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 15, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:25)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 22, NodeDiv, "/", "com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.div(DFEVar.java:1014)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:35)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 20, NodeSlice, "[127:96]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:25)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 21, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:25)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 55, NodeFIFO, "FIFO(33)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 26, NodeMul, "*", "com.maxeler.maxcompiler.v2.kernelcompiler.types.composite.DFEVectorBase.mulAsRHS(DFEVectorBase.java:879)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:35)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 9, NodeSlice, "[127:96]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:24)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 10, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:24)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 56, NodeFIFO, "FIFO(44)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 30, NodeSub, "-", "com.maxeler.maxcompiler.v2.kernelcompiler.types.composite.DFEVectorBase.sub(DFEVectorBase.java:1037)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:36)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 41, NodeReinterpret, "<{HWRawBits:32}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:816)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:40)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 18, NodeSlice, "[95:64]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:25)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 19, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:25)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 57, NodeFIFO, "FIFO(33)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 25, NodeMul, "*", "com.maxeler.maxcompiler.v2.kernelcompiler.types.composite.DFEVectorBase.mulAsRHS(DFEVectorBase.java:879)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:35)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 7, NodeSlice, "[95:64]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:24)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 8, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:24)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 58, NodeFIFO, "FIFO(44)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 29, NodeSub, "-", "com.maxeler.maxcompiler.v2.kernelcompiler.types.composite.DFEVectorBase.sub(DFEVectorBase.java:1037)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:36)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 39, NodeReinterpret, "<{HWRawBits:32}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:816)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:40)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 16, NodeSlice, "[63:32]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:25)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 17, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:25)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 59, NodeFIFO, "FIFO(33)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 24, NodeMul, "*", "com.maxeler.maxcompiler.v2.kernelcompiler.types.composite.DFEVectorBase.mulAsRHS(DFEVectorBase.java:879)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:35)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 5, NodeSlice, "[63:32]", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:24)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 6, NodeReinterpret, "<{HWFloat:8, 24}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:606)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:24)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 60, NodeFIFO, "FIFO(44)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 28, NodeSub, "-", "com.maxeler.maxcompiler.v2.kernelcompiler.types.composite.DFEVectorBase.sub(DFEVectorBase.java:1037)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:36)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 37, NodeReinterpret, "<{HWRawBits:32}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:816)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:40)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 61, NodeFIFO, "FIFO(33)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 23, NodeMul, "*", "com.maxeler.maxcompiler.v2.kernelcompiler.types.composite.DFEVectorBase.mulAsRHS(DFEVectorBase.java:879)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:35)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 62, NodeFIFO, "FIFO(44)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 27, NodeSub, "-", "com.maxeler.maxcompiler.v2.kernelcompiler.types.composite.DFEVectorBase.sub(DFEVectorBase.java:1037)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:36)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 36, NodeReinterpret, "<{HWRawBits:32}>", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:816)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:40)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 38, NodeCat, "@", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:816)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:40)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 40, NodeCat, "@", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:816)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:40)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 42, NodeCat, "@", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:816)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:40)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 35, NodeOutput, "Output(outVector)", "com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:816)\ngaussianelimination.GaussianBackSubstitutionKernel.<init>(GaussianBackSubstitutionKernel.maxj:40)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:21)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 47, NodeConstantRawBits, "{HWOffsetFix:1, 0, UNSIGNED}\n0x1; 1.0", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 64, NodeConstantRawBits, "{HWOffsetFix:1, 0, UNSIGNED}\n0x1; 1.0", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 44, NodeConstantRawBits, "{HWOffsetFix:49, 0, UNSIGNED}\n0x1000000000000; 2.81474976710656E14", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 45, NodeCounterV1, "Counter(NUMERIC_INCREMENTING)\nInc: 1\nReset: 0\nInit: 0", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 46, NodeStreamOffset, "stream offset: 1", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 48, NodeOutputMappedReg, "Scalar output (current_run_cycle_count)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 63, NodeConstantRawBits, "{HWOffsetFix:1, 0, UNSIGNED}\n0x1; 1.0", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 50, NodeConstantRawBits, "{HWOffsetFix:49, 0, UNSIGNED}\n0x1000000000000; 2.81474976710656E14", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 51, NodeCounterV1, "Counter(NUMERIC_INCREMENTING)\nInc: 1\nReset: 0\nInit: 0", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 53, NodeInputMappedReg, "Scalar input (run_cycle_count)", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 54, NodeEq, "==", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+PHOTON_NODE_DATA(GaussianBackSubstitutionKernel, 52, NodeFlush, "flush on trigger", "com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)\ngaussianelimination.GaussianBackSubstitutionManager.main(GaussianBackSubstitutionManager.maxj:27)\n")
+#endif
+
+#ifdef SLIC_USE_DEFINITIONS
+#include <stdio.h>
+#include <math.h>
+#include <pthread.h>
+#include <string.h>
+#include <unistd.h>
+#include <stdlib.h>
+static max_file_t *stored_maxfile = NULL;
+static max_engine_t *stored_engine = NULL;
+static char *stored_error = NULL;
+static int stored_has_error = 0;
+static pthread_once_t slic_bs_is_initialised = PTHREAD_ONCE_INIT;
+
+static void set_error(const char *error_str)
+{
+	stored_has_error = 1; 
+	if(stored_error == NULL) {
+		stored_error = strdup(error_str);
+	} else {
+		char *nerr = malloc(strlen(stored_error) + strlen(error_str) + 2);
+		sprintf(nerr, "%s\n%s", stored_error, error_str);
+		free(stored_error);
+		stored_error = nerr;
+	}
+}
+static void set_error_and_free(char *error_str){
+	set_error(error_str);
+	free(error_str);
+}
+int GaussianBackSubstitution_has_errors(void)
+{	return stored_has_error; }
+const char* GaussianBackSubstitution_get_errors(void)
+{	return stored_error; }
+void GaussianBackSubstitution_clear_errors(void)
+{
+	free(stored_error);
+	stored_error = NULL;
+	stored_has_error = 0;
+}
+
+static char GaussianBackSubstitution_use_simulation[16];
+static void GaussianBackSubstitution_def_use_simulation(void)
+{
+	long pid = ((long) getpid()) % 100000;
+	snprintf(GaussianBackSubstitution_use_simulation, 16, "Gaussian_%05ld_", pid);
+}
+static const char *GaussianBackSubstitution_check_use_simulation(void)
+{
+	GaussianBackSubstitution_def_use_simulation();
+	const char *use_sim = max_config_get_string(MAX_CONFIG_USE_SIMULATION);
+	if (use_sim == NULL) {
+		use_sim = GaussianBackSubstitution_use_simulation;
+		max_config_set_string(MAX_CONFIG_USE_SIMULATION, use_sim);
+	}
+	return use_sim;
+}
+
+static int GaussianBackSubstitution_simulation_launch = 0;
+int GaussianBackSubstitution_simulator_start(void)
+{
+	int retval = 0;
+	const char *use_sim = GaussianBackSubstitution_check_use_simulation();
+	char buff[1024];
+	snprintf(buff, 1024, "PATH=simutils:$PATH maxcompilersim -d 1 -n %s -c MAX4848A -S simutils restart", use_sim);
+	FILE *pipe_fp = popen(buff, "r");
+	if (pipe_fp == NULL) {
+		strncat(buff, " : failed to execute.", (1024 - strlen(buff)));
+		set_error(buff);
+		return -1;
+	}
+	while (fgets(buff, 1024, pipe_fp) != NULL) {
+		/* Uncomment this to get simulator command output */
+		/* fprintf(stderr, buff); */
+		if (strstr(buff, "Error")) {
+			set_error(buff);
+			retval = -1;
+		}
+	}
+	pclose(pipe_fp);
+	return retval;
+}
+
+int GaussianBackSubstitution_simulator_stop(void)
+{
+	const char *use_sim = GaussianBackSubstitution_check_use_simulation();
+	char buff[1024];
+	snprintf(buff, 1024, "PATH=simutils:$PATH maxcompilersim -d 1 -n %s -c MAX4848A -S simutils stop", use_sim);
+	FILE *pipe_fp = popen(buff, "r");
+	if (pipe_fp == NULL) {
+		strncat(buff, " : failed to execute.", (1024 - strlen(buff)));
+		set_error(buff);
+		return -1;
+	}
+	while (fgets(buff, 1024, pipe_fp) != NULL) {
+		/* Uncomment this to get simulator command output */
+		/* fprintf(stderr, buff); */
+		;
+	}
+	pclose(pipe_fp);
+	return 0;
+}
+
+static void GaussianBackSubstitution_static_init(void) 
+{
+	stored_maxfile = GaussianBackSubstitution_init();
+	if (stored_maxfile == NULL || !max_ok(stored_maxfile->errors)) {
+		stored_maxfile = NULL;
+		if(max_config_get_bool(MAX_CONFIG_STATIC_INTERFACE_ABORT_ON_ERROR)) abort();
+		else { set_error("Unable to load maxfile"); return; }
+	}
+	if(!max_ok(max_global_errors())) {
+		set_error_and_free(max_errors_trace(max_global_errors()));
+		return;
+	}
+	if(!max_config_get_bool(MAX_CONFIG_STATIC_INTERFACE_ABORT_ON_ERROR))
+		max_errors_mode(stored_maxfile->errors, 0);
+	time_t timeout_previous = max_load_timeout(stored_maxfile, 30);
+	const char *use_sim = GaussianBackSubstitution_check_use_simulation();
+	if (max_ping_daemon(stored_maxfile, use_sim) == 0) {
+		int sim_stat = GaussianBackSubstitution_simulator_start();
+		if ((sim_stat == 0) && (max_ping_daemon(stored_maxfile, use_sim) == 1)) {
+			GaussianBackSubstitution_simulation_launch = 1;
+		} else {
+			set_error("Error: An error occurred while trying to start the simulation infrastructure automatically.");
+			set_error("Error: Check that 'use_simulation=<simulator_name>' is set correctly in your SLiC configuration");
+			set_error("Error: and that the associated simulated system daemon is running.");
+			max_file_free(stored_maxfile);
+			stored_maxfile = NULL;
+			return;
+		}
+	}
+	stored_engine = max_load(stored_maxfile, "*");
+	if (!max_ok(stored_maxfile->errors)) {
+		if(max_config_get_bool(MAX_CONFIG_STATIC_INTERFACE_ABORT_ON_ERROR)) {
+			fprintf(stderr, "\nUnable to load engine: aborting now.\n\n");
+			fflush(stderr);
+			abort();
+		} else {
+			set_error_and_free(max_errors_trace(stored_maxfile->errors));
+			max_file_free(stored_maxfile);
+			stored_maxfile = NULL;
+			return;
+		} 
+	} 
+	max_load_timeout(stored_maxfile, timeout_previous);
+}
+void GaussianBackSubstitution_free(void)
+{
+	if (stored_engine != NULL) {
+		max_unload(stored_engine);
+		stored_engine = NULL;
+	}
+	if (stored_maxfile != NULL) {
+		max_file_free(stored_maxfile);
+		stored_maxfile = NULL;
+	}
+	if (stored_error != NULL) {
+		free(stored_error);
+		stored_error = NULL;
+	}
+	if (GaussianBackSubstitution_simulation_launch == 1) {
+		int sim_stat = GaussianBackSubstitution_simulator_stop();
+		if (sim_stat != 0 ) {
+			fprintf(stderr, "Error stopping simulator.");
+		}
+		GaussianBackSubstitution_simulation_launch = 0;
+	}
+}
+
+static int GaussianBackSubstitution_get_pcie_alignment(void)
+{
+#ifdef GaussianBackSubstitution_PCIE_ALIGNMENT
+	return ((GaussianBackSubstitution_PCIE_ALIGNMENT < 1) ? 16 : GaussianBackSubstitution_PCIE_ALIGNMENT);
+#else
+	return 16;
+#endif
+}
+
+static int GaussianBackSubstitution_check_aligned(const void *data)
+{
+	uintptr_t pointer = (uintptr_t) data;
+	int alignment = GaussianBackSubstitution_get_pcie_alignment();
+	return (pointer % alignment) ? 1 : 0;
+}
+
+static void *GaussianBackSubstitution_malloc_aligned(const size_t size)
+{
+	void *ptr;
+	int alignment = GaussianBackSubstitution_get_pcie_alignment();
+	posix_memalign(&ptr, alignment, size);
+	return ptr;
+}
+
+
+
+/*----------------------------------------------------------------------------*/
+/*---------------------------- Interface default -----------------------------*/
+/*----------------------------------------------------------------------------*/
+
+
+
+#define CHECK_ERRORS_ST(ST, RET) if(!max_ok(ST->errors)) { if(max_config_get_bool(MAX_CONFIG_STATIC_INTERFACE_ABORT_ON_ERROR)) { fprintf(stderr, "%s\n", max_errors_trace(ST->errors)); abort(); } set_error_and_free(max_errors_trace(ST->errors)); return RET; } 
+#define CHECK_NULL(VALUE, MESSAGE, RET) if(VALUE == NULL) { if (max_config_get_bool(MAX_CONFIG_STATIC_INTERFACE_ABORT_ON_ERROR)) { fprintf(stderr, "%s\n%s\n", (stored_error == NULL) ? "" : stored_error, MESSAGE); abort(); } set_error(MESSAGE); return RET; }
+
+ 
+typedef struct GaussianBackSubstitution_callback_stream {
+	uint8_t *user_ptr;
+	uint8_t *aligned_ptr;
+	size_t   size;
+	int      is_output;
+} GaussianBackSubstitution_callback_stream_t;
+
+typedef struct GaussianBackSubstitution_callback_data {
+	GaussianBackSubstitution_callback_stream_t stream[3]; 
+	int count;
+	int max_count;
+} GaussianBackSubstitution_callback_data_t;
+
+static void GaussianBackSubstitution_callback_internal(void *cb_data)
+{
+	GaussianBackSubstitution_callback_data_t *data = (GaussianBackSubstitution_callback_data_t*) cb_data;
+	for (int i = 0 ; i < data->count ; i++ ) {
+		GaussianBackSubstitution_callback_stream_t *s = &data->stream[i];
+		if (s->is_output && (s->size > 0)) {
+			memcpy(s->user_ptr, s->aligned_ptr, s->size);
+		}
+		free(s->aligned_ptr);
+	}
+	free(data);
+}
+
+static max_actions_t* GaussianBackSubstitution_convert_internal(
+	max_file_t *maxfile,
+	GaussianBackSubstitution_actions_t *interface_actions,
+	int  is_internal_call,
+	void (**callback_func)(void*),
+	void **callback_data)
+{
+	max_actions_t *actions = max_actions_init(maxfile, NULL);
+	if(actions == NULL) return NULL;
+
+#define CHECK_ERRORS if(!max_ok(actions->errors)) { set_error_and_free(max_errors_trace(actions->errors)); return NULL; } 
+
+	GaussianBackSubstitution_callback_data_t *cb_data = NULL;
+	int use_callback = (callback_func != NULL) && (callback_data != NULL);
+	if (use_callback) {
+		cb_data = malloc(sizeof(GaussianBackSubstitution_callback_data_t));
+		if (cb_data == NULL) {
+			fprintf(stderr, "Unable to allocate memory for stream callback data in function GaussianBackSubstitution_convert_internal\n");
+			return NULL;
+		}
+		cb_data->max_count = 3;
+		cb_data->count     = 0;
+		*callback_data     = cb_data;
+		*callback_func     = &GaussianBackSubstitution_callback_internal;
+	}
+
+	int32_t param_N = interface_actions->param_N;
+	
+	/* code for scalar GaussianBackSubstitutionKernel.run_cycle_count */
+	uint64_t ticks_GaussianBackSubstitutionKernel = param_N;
+	max_set_ticks(actions, "GaussianBackSubstitutionKernel", param_N);
+	CHECK_ERRORS;
+	/* end of code for scalar GaussianBackSubstitutionKernel.run_cycle_count*/
+	
+	int64_t tmp_0 = ((param_N * 4) * 4);
+	
+	/* code for stream inVector */
+	size_t instream_size_inVector = tmp_0;
+	if (instream_size_inVector > 0) {
+		const float *stream_ptr = interface_actions->instream_inVector;
+		if (use_callback && (1 == GaussianBackSubstitution_check_aligned(interface_actions->instream_inVector))) {
+			float *aligned_instream_inVector = malloc(instream_size_inVector);
+			if (aligned_instream_inVector == NULL) {
+				max_report_error_slic(actions->errors, __FILE__, __LINE__, 526, "Failed to allocate aligned memory for stream 'inVector'");
+				CHECK_ERRORS;
+			}
+			(&cb_data->stream[cb_data->count])->user_ptr    = (uint8_t*) interface_actions->instream_inVector;
+			(&cb_data->stream[cb_data->count])->aligned_ptr = (uint8_t*) aligned_instream_inVector;
+			(&cb_data->stream[cb_data->count])->size        = instream_size_inVector;
+			(&cb_data->stream[cb_data->count])->is_output   = 0;
+			cb_data->count += 1;
+			memcpy(aligned_instream_inVector, interface_actions->instream_inVector, instream_size_inVector);
+			stream_ptr = aligned_instream_inVector;
+		}
+		max_queue_input(actions, "inVector", stream_ptr, instream_size_inVector);
+		CHECK_ERRORS;
+	}
+	/* end of code for stream inVector */
+	
+	int64_t tmp_1 = ((param_N * 4) * 4);
+	
+	/* code for stream inVector1 */
+	size_t instream_size_inVector1 = tmp_1;
+	if (instream_size_inVector1 > 0) {
+		const float *stream_ptr = interface_actions->instream_inVector1;
+		if (use_callback && (1 == GaussianBackSubstitution_check_aligned(interface_actions->instream_inVector1))) {
+			float *aligned_instream_inVector1 = malloc(instream_size_inVector1);
+			if (aligned_instream_inVector1 == NULL) {
+				max_report_error_slic(actions->errors, __FILE__, __LINE__, 526, "Failed to allocate aligned memory for stream 'inVector1'");
+				CHECK_ERRORS;
+			}
+			(&cb_data->stream[cb_data->count])->user_ptr    = (uint8_t*) interface_actions->instream_inVector1;
+			(&cb_data->stream[cb_data->count])->aligned_ptr = (uint8_t*) aligned_instream_inVector1;
+			(&cb_data->stream[cb_data->count])->size        = instream_size_inVector1;
+			(&cb_data->stream[cb_data->count])->is_output   = 0;
+			cb_data->count += 1;
+			memcpy(aligned_instream_inVector1, interface_actions->instream_inVector1, instream_size_inVector1);
+			stream_ptr = aligned_instream_inVector1;
+		}
+		max_queue_input(actions, "inVector1", stream_ptr, instream_size_inVector1);
+		CHECK_ERRORS;
+	}
+	/* end of code for stream inVector1 */
+	
+	int64_t tmp_2 = ((param_N * 4) * 4);
+	
+	/* code for stream outVector */
+	size_t outstream_size_outVector = tmp_2;
+	if (outstream_size_outVector > 0) {
+		float *stream_ptr = interface_actions->outstream_outVector;
+		if (use_callback && (1 == GaussianBackSubstitution_check_aligned(interface_actions->outstream_outVector))) {
+			float *aligned_outstream_outVector = malloc(outstream_size_outVector);
+			if (aligned_outstream_outVector == NULL) {
+				max_report_error_slic(actions->errors, __FILE__, __LINE__, 526, "Failed to allocate aligned memory for stream 'outVector'");
+				CHECK_ERRORS;
+			}
+			(&cb_data->stream[cb_data->count])->user_ptr    = (uint8_t*) interface_actions->outstream_outVector;
+			(&cb_data->stream[cb_data->count])->aligned_ptr = (uint8_t*) aligned_outstream_outVector;
+			(&cb_data->stream[cb_data->count])->size        = outstream_size_outVector;
+			(&cb_data->stream[cb_data->count])->is_output   = 1;
+			cb_data->count += 1;
+			stream_ptr = aligned_outstream_outVector;
+		}
+		max_queue_output(actions, "outVector", stream_ptr, outstream_size_outVector);
+		CHECK_ERRORS;
+	}
+	/* end of code for stream outVector */
+	
+	if (use_callback && cb_data->count == 0) {
+		*callback_data = NULL;
+		*callback_func = NULL;
+		free(cb_data);
+	}
+	return actions;
+#undef CHECK_ERRORS
+}
+
+void GaussianBackSubstitution(
+	int32_t param_N,
+	const float *instream_inVector,
+	const float *instream_inVector1,
+	float *outstream_outVector)
+{
+	(void) pthread_once(&slic_bs_is_initialised, GaussianBackSubstitution_static_init);
+	CHECK_NULL(stored_maxfile, "Maxfile was not loaded", );
+	max_run_t *run = GaussianBackSubstitution_nonblock(param_N, instream_inVector, instream_inVector1, outstream_outVector);
+	CHECK_NULL(run, "Unable to run actions", );
+	max_wait(run);
+}
+
+max_run_t *GaussianBackSubstitution_nonblock(
+	int32_t param_N,
+	const float *instream_inVector,
+	const float *instream_inVector1,
+	float *outstream_outVector)
+{
+	GaussianBackSubstitution_actions_t interface_actions;
+	interface_actions.param_N = param_N;
+	interface_actions.instream_inVector = instream_inVector;
+	interface_actions.instream_inVector1 = instream_inVector1;
+	interface_actions.outstream_outVector = outstream_outVector;
+	(void) pthread_once(&slic_bs_is_initialised, GaussianBackSubstitution_static_init);
+	CHECK_NULL(stored_maxfile, "Maxfile was not loaded", NULL);
+	void (*cb_func)(void*) = NULL;
+	void  *cb_data         = NULL;
+	max_actions_t *actions = GaussianBackSubstitution_convert_internal(stored_maxfile, &interface_actions, 1, &cb_func, &cb_data);
+	CHECK_NULL(actions, "Unable to build actions", NULL);
+	max_validate(actions);
+	CHECK_ERRORS_ST(actions, NULL);
+	CHECK_ERRORS_ST(stored_engine, NULL);
+	max_run_t *run;
+	if (cb_func == NULL) {
+		run = max_run_nonblock(stored_engine, actions);
+	} else {
+		run = max_run_nonblock_with_cb(stored_engine, actions, cb_func, cb_data);
+	}
+	CHECK_NULL(run, "Unable to run actions", NULL);
+	CHECK_ERRORS_ST(actions, NULL);
+	max_actions_free(actions);
+	return run;
+}
+
+void GaussianBackSubstitution_run(
+	max_engine_t *engine,
+	GaussianBackSubstitution_actions_t *interface_actions)
+{
+	max_run_t *run = GaussianBackSubstitution_run_nonblock(engine, interface_actions);
+	CHECK_NULL(run, "Unable to run actions", );
+	max_wait(run);
+}
+
+max_run_t *GaussianBackSubstitution_run_nonblock(
+	max_engine_t *engine,
+	GaussianBackSubstitution_actions_t *interface_actions)
+{
+	max_file_t *maxfile = max_engine_get_max_file(engine); 
+	void (*cb_func)(void*) = NULL;
+	void  *cb_data         = NULL;
+	max_actions_t *actions = GaussianBackSubstitution_convert_internal(maxfile, interface_actions, 1, &cb_func, &cb_data);
+	CHECK_NULL(actions, "Unable to build actions", NULL);
+	max_validate(actions);
+	CHECK_ERRORS_ST(actions, NULL);
+	max_run_t *run;
+	if (cb_func == NULL) {
+		run = max_run_nonblock(engine, actions);
+	} else {
+		run = max_run_nonblock_with_cb(engine, actions, cb_func, cb_data);
+	}
+	CHECK_NULL(run, "Unable to run actions", NULL);
+	max_actions_free(actions);
+	return run;
+}
+
+
+/**
+ * \brief Group run advanced static function for the interface 'default'.
+ * 
+ * \param [in] group Group to use.
+ * \param [in,out] interface_actions Actions to run.
+ *
+ * Run the actions on the first device available in the group.
+ */
+void GaussianBackSubstitution_run_group(max_group_t *group, GaussianBackSubstitution_actions_t *interface_actions)
+{
+	max_run_t *run = GaussianBackSubstitution_run_group_nonblock(group, interface_actions);
+	CHECK_NULL(run, "Unable to run actions", );
+	max_wait(run);
+}
+
+
+/**
+ * \brief Group run advanced static non-blocking function for the interface 'default'.
+ * 
+ *
+ * Schedule the actions to run on the first device available in the group and return immediately.
+ * The status of the run must be checked with ::max_wait. 
+ * Note that use of ::max_nowait is prohibited with non-blocking running on groups:
+ * see the ::max_run_group_nonblock documentation for more explanation.
+ *
+ * \param [in] group Group to use.
+ * \param [in] interface_actions Actions to run.
+ * \return A handle on the execution status of the actions, or NULL in case of error.
+ */
+max_run_t *GaussianBackSubstitution_run_group_nonblock(max_group_t *group, GaussianBackSubstitution_actions_t *interface_actions)
+{
+	max_file_t *maxfile = max_group_get_max_file(group);
+	max_actions_t *actions = GaussianBackSubstitution_convert_internal(maxfile, interface_actions, 1, NULL, NULL);
+	if(actions == NULL) return NULL;
+	if(!max_ok(actions->errors)) return NULL;
+	max_validate(actions);
+	max_run_t *run = max_run_group_nonblock(group, actions);
+	max_actions_free(actions);
+	return run;
+}
+
+
+/**
+ * \brief Array run advanced static function for the interface 'default'.
+ * 
+ * \param [in] engarray The array of devices to use.
+ * \param [in,out] interface_actions The array of actions to run.
+ *
+ * Run the array of actions on the array of engines.  The length of interface_actions
+ * must match the size of engarray.
+ */
+void GaussianBackSubstitution_run_array(max_engarray_t *engarray, GaussianBackSubstitution_actions_t *interface_actions[])
+{
+	max_run_t *run = GaussianBackSubstitution_run_array_nonblock(engarray, interface_actions);
+	CHECK_NULL(run, "Unable to run actions", );
+	max_wait(run);
+}
+
+
+/**
+ * \brief Array run advanced static non-blocking function for the interface 'default'.
+ * 
+ *
+ * Schedule to run the array of actions on the array of engines, and return immediately.
+ * The length of interface_actions must match the size of engarray.
+ * The status of the run can be checked either by ::max_wait or ::max_nowait;
+ * note that one of these *must* be called, so that associated memory can be released.
+ *
+ * \param [in] engarray The array of devices to use.
+ * \param [in] interface_actions The array of actions to run.
+ * \return A handle on the execution status of the actions, or NULL in case of error.
+ */
+max_run_t *GaussianBackSubstitution_run_array_nonblock(max_engarray_t *engarray, GaussianBackSubstitution_actions_t *interface_actions[])
+{
+	max_file_t *maxfile = max_engarray_get_max_file(engarray, 0);
+	int i;
+	max_actarray_t *actarray = max_actarray_init(maxfile, engarray->size);
+	if (actarray == NULL) return NULL;
+	max_actions_t **arr_actions = malloc(engarray->size * sizeof(max_actions_t*));
+	for ( i = 0 ; i < actarray->size; i++ ) {
+		max_actions_t *actions = GaussianBackSubstitution_convert_internal(maxfile, interface_actions[i], 1, NULL, NULL);
+		if (actions == NULL) return NULL;
+		arr_actions[i] = actions;
+		max_set_action(actarray, i, actions);
+	}
+	max_run_t *run = max_run_array_nonblock(engarray, actarray);
+	for ( i = 0 ; i < actarray->size ; i++ ) { max_actions_free(arr_actions[i]); }
+	max_actarray_free(actarray);
+	free(arr_actions);
+	return run;
+}
+
+
+/**
+ * \brief Converts a static-interface action struct into a dynamic-interface max_actions_t struct.
+ *
+ * Note that this is an internal utility function used by other functions in the static interface.
+ *
+ * \param [in] maxfile The maxfile to use.
+ * \param [in] interface_actions The interface-specific actions to run.
+ * \return The dynamic-interface actions to run, or NULL in case of error.
+ */
+max_actions_t* GaussianBackSubstitution_convert(max_file_t *maxfile, GaussianBackSubstitution_actions_t *interface_actions)
+{
+	return GaussianBackSubstitution_convert_internal(maxfile, interface_actions, 0, NULL, NULL);
+}
+
+#undef CHECK_ERRORS_ST
+#undef CHECK_NULL
+
+
+
+#endif /* SLIC_USE_DEFINITIONS */
+
+#ifdef SLIC_DYNAMIC_CODE
+SLIC_MODE_START(default)	
+SLIC_PARAMETER_UINT64(int32_t, N, param_N)	
+SLIC_SET_TICKS(GaussianBackSubstitutionKernel, param_N)	
+SLIC_TEMP_VAR(int64_t tmp_0 = ((param_N * 4) * 4);)	
+SLIC_STREAM(inVector, tmp_0)	
+SLIC_TEMP_VAR(int64_t tmp_1 = ((param_N * 4) * 4);)	
+SLIC_STREAM(inVector1, tmp_1)	
+SLIC_TEMP_VAR(int64_t tmp_2 = ((param_N * 4) * 4);)	
+SLIC_STREAM(outVector, tmp_2)	
+SLIC_MODE_END(default)
+
+#endif /* SLIC_DYNAMIC_CODE */
+
+#ifdef SKIN_META_DATA
+PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PG1h
+eGZpbGUgZm9ybWF0LXZlcnNpb249IjIwMTIwMjAwIiBoZWFkZXI9IkdhdXNzaWFuQmFja1N1YnN0
+aXR1dGlvbi5oIiBuYW1lPSJHYXVzc2lhbkJhY2tTdWJzdGl0dXRpb24iPjxjb25zdGFudCBuYW1l
+PSJQQ0lFX0FMSUdOTUVOVCIgdHlwZT0ibG9uZyIgdmFsdWU9IjE2Ii8+PGNvbnN0YW50IG5hbWU9
+InZlY3RvclNpemUiIHR5cGU9ImxvbmciIHZhbHVlPSI0Ii8+PGVuZ2luZW1vZGUgbmFtZT0iZGVm
+YXVsdCI+PGZ1bmN0aW9uIG5hbWU9IkdhdXNzaWFuQmFja1N1YnN0aXR1dGlvbiIgcmV0dXJuLXZh
+bHVlPSJ2b2lkIj48c2NhbGFyIGRlc2M9IkludGVyZmFjZSBQYXJhbWV0ZXIgJnF1b3Q7TiZxdW90
+Oy46IE51bWJlciBvZiBkYXRhIGl0ZW1zIHRvIHByb2Nlc3MiIGRpcmVjdGlvbj0iSW5wdXQiIG5h
+bWU9InBhcmFtX04iIHR5cGU9ImludDMyX3QiLz48YXJyYXkgZGVzYz0iVGhlIHN0cmVhbSBzaG91
+bGQgYmUgb2Ygc2l6ZSAoKHBhcmFtX04gKiA0KSAqIDQpIGJ5dGVzLiIgZGlyZWN0aW9uPSJJbnB1
+dCIgbmFtZT0iaW5zdHJlYW1faW5WZWN0b3IiIHNpemU9IigocGFyYW1fTiAqIDQpICogNCkiIHRy
+YW5zcG9zZT0idHJ1ZSIgdHlwZT0iZmxvYXQiPjxkaW1lbnNpb24gaW5kZXg9IjAiPjxsZW5ndGg+
+PGZ1bmN0aW9uQ2FsbD48bnVtQmluYXJ5T3BlcmF0b3Igb3BlcmF0b3I9Ii8iIHZhbHVlPSIoKChw
+YXJhbV9OICogNCkgKiA0KSAvIDQpIj48ZnVuY3Rpb25DYWxsPjxudW1CaW5hcnlPcGVyYXRvciBv
+cGVyYXRvcj0iKiIgdmFsdWU9IigocGFyYW1fTiAqIDQpICogNCkiPjxmdW5jdGlvbkNhbGw+PG51
+bUJpbmFyeU9wZXJhdG9yIG9wZXJhdG9yPSIqIiB2YWx1ZT0iKHBhcmFtX04gKiA0KSI+PHVzZXJQ
+YXJhbSB2YWx1ZT0icGFyYW1fTiIvPjxjb25zdGFudFZhbHVlIHZhbHVlPSI0Ii8+PC9udW1CaW5h
+cnlPcGVyYXRvcj48L2Z1bmN0aW9uQ2FsbD48Y29uc3RhbnRWYWx1ZSB2YWx1ZT0iNCIvPjwvbnVt
+QmluYXJ5T3BlcmF0b3I+PC9mdW5jdGlvbkNhbGw+PGNvbnN0YW50VmFsdWUgdmFsdWU9IjQiLz48
+L251bUJpbmFyeU9wZXJhdG9yPjwvZnVuY3Rpb25DYWxsPjwvbGVuZ3RoPjwvZGltZW5zaW9uPjwv
+YXJyYXk+PGFycmF5IGRlc2M9IlRoZSBzdHJlYW0gc2hvdWxkIGJlIG9mIHNpemUgKChwYXJhbV9O
+ICogNCkgKiA0KSBieXRlcy4iIGRpcmVjdGlvbj0iSW5wdXQiIG5hbWU9Imluc3RyZWFtX2luVmVj
+dG9yMSIgc2l6ZT0iKChwYXJhbV9OICogNCkgKiA0KSIgdHJhbnNwb3NlPSJ0cnVlIiB0eXBlPSJm
+bG9hdCI+PGRpbWVuc2lvbiBpbmRleD0iMCI+PGxlbmd0aD48ZnVuY3Rpb25DYWxsPjxudW1CaW5h
+cnlPcGVyYXRvciBvcGVyYXRvcj0iLyIgdmFsdWU9IigoKHBhcmFtX04gKiA0KSAqIDQpIC8gNCki
+PjxmdW5jdGlvbkNhbGw+PG51bUJpbmFyeU9wZXJhdG9yIG9wZXJhdG9yPSIqIiB2YWx1ZT0iKChw
+YXJhbV9OICogNCkgKiA0KSI+PGZ1bmN0aW9uQ2FsbD48bnVtQmluYXJ5T3BlcmF0b3Igb3BlcmF0
+b3I9IioiIHZhbHVlPSIocGFyYW1fTiAqIDQpIj48dXNlclBhcmFtIHZhbHVlPSJwYXJhbV9OIi8+
+PGNvbnN0YW50VmFsdWUgdmFsdWU9IjQiLz48L251bUJpbmFyeU9wZXJhdG9yPjwvZnVuY3Rpb25D
+YWxsPjxjb25zdGFudFZhbHVlIHZhbHVlPSI0Ii8+PC9udW1CaW5hcnlPcGVyYXRvcj48L2Z1bmN0
+aW9uQ2FsbD48Y29uc3RhbnRWYWx1ZSB2YWx1ZT0iNCIvPjwvbnVtQmluYXJ5T3BlcmF0b3I+PC9m
+dW5jdGlvbkNhbGw+PC9sZW5ndGg+PC9kaW1lbnNpb24+PC9hcnJheT48YXJyYXkgZGVzYz0iVGhl
+IHN0cmVhbSBzaG91bGQgYmUgb2Ygc2l6ZSAoKHBhcmFtX04gKiA0KSAqIDQpIGJ5dGVzLiIgZGly
+ZWN0aW9uPSJPdXRwdXQiIG5hbWU9Im91dHN0cmVhbV9vdXRWZWN0b3IiIHNpemU9IigocGFyYW1f
+TiAqIDQpICogNCkiIHRyYW5zcG9zZT0idHJ1ZSIgdHlwZT0iZmxvYXQiPjxkaW1lbnNpb24gaW5k
+ZXg9IjAiPjxsZW5ndGg+PGZ1bmN0aW9uQ2FsbD48bnVtQmluYXJ5T3BlcmF0b3Igb3BlcmF0b3I9
+Ii8iIHZhbHVlPSIoKChwYXJhbV9OICogNCkgKiA0KSAvIDQpIj48ZnVuY3Rpb25DYWxsPjxudW1C
+aW5hcnlPcGVyYXRvciBvcGVyYXRvcj0iKiIgdmFsdWU9IigocGFyYW1fTiAqIDQpICogNCkiPjxm
+dW5jdGlvbkNhbGw+PG51bUJpbmFyeU9wZXJhdG9yIG9wZXJhdG9yPSIqIiB2YWx1ZT0iKHBhcmFt
+X04gKiA0KSI+PHVzZXJQYXJhbSB2YWx1ZT0icGFyYW1fTiIvPjxjb25zdGFudFZhbHVlIHZhbHVl
+PSI0Ii8+PC9udW1CaW5hcnlPcGVyYXRvcj48L2Z1bmN0aW9uQ2FsbD48Y29uc3RhbnRWYWx1ZSB2
+YWx1ZT0iNCIvPjwvbnVtQmluYXJ5T3BlcmF0b3I+PC9mdW5jdGlvbkNhbGw+PGNvbnN0YW50VmFs
+dWUgdmFsdWU9IjQiLz48L251bUJpbmFyeU9wZXJhdG9yPjwvZnVuY3Rpb25DYWxsPjwvbGVuZ3Ro
+PjwvZGltZW5zaW9uPjwvYXJyYXk+PC9mdW5jdGlvbj48L2VuZ2luZW1vZGU+PC9tYXhmaWxlPg==
+#endif /* SKIN_META_DATA */
+
+#ifdef SLIC_B64_DEFINITIONS
+I2luY2x1ZGUgPHN0ZGlvLmg+CiNpbmNsdWRlIDxtYXRoLmg+CiNpbmNsdWRlIDxwdGhyZWFkLmg+
+CiNpbmNsdWRlIDxzdHJpbmcuaD4KI2luY2x1ZGUgPHVuaXN0ZC5oPgojaW5jbHVkZSA8c3RkbGli
+Lmg+CnN0YXRpYyBtYXhfZmlsZV90ICpzdG9yZWRfbWF4ZmlsZSA9IE5VTEw7CnN0YXRpYyBtYXhf
+ZW5naW5lX3QgKnN0b3JlZF9lbmdpbmUgPSBOVUxMOwpzdGF0aWMgY2hhciAqc3RvcmVkX2Vycm9y
+ID0gTlVMTDsKc3RhdGljIGludCBzdG9yZWRfaGFzX2Vycm9yID0gMDsKc3RhdGljIHB0aHJlYWRf
+b25jZV90IHNsaWNfYnNfaXNfaW5pdGlhbGlzZWQgPSBQVEhSRUFEX09OQ0VfSU5JVDsKCnN0YXRp
+YyB2b2lkIHNldF9lcnJvcihjb25zdCBjaGFyICplcnJvcl9zdHIpCnsKCXN0b3JlZF9oYXNfZXJy
+b3IgPSAxOyAKCWlmKHN0b3JlZF9lcnJvciA9PSBOVUxMKSB7CgkJc3RvcmVkX2Vycm9yID0gc3Ry
+ZHVwKGVycm9yX3N0cik7Cgl9IGVsc2UgewoJCWNoYXIgKm5lcnIgPSBtYWxsb2Moc3RybGVuKHN0
+b3JlZF9lcnJvcikgKyBzdHJsZW4oZXJyb3Jfc3RyKSArIDIpOwoJCXNwcmludGYobmVyciwgIiVz
+XG4lcyIsIHN0b3JlZF9lcnJvciwgZXJyb3Jfc3RyKTsKCQlmcmVlKHN0b3JlZF9lcnJvcik7CgkJ
+c3RvcmVkX2Vycm9yID0gbmVycjsKCX0KfQpzdGF0aWMgdm9pZCBzZXRfZXJyb3JfYW5kX2ZyZWUo
+Y2hhciAqZXJyb3Jfc3RyKXsKCXNldF9lcnJvcihlcnJvcl9zdHIpOwoJZnJlZShlcnJvcl9zdHIp
+Owp9CmludCBHYXVzc2lhbkJhY2tTdWJzdGl0dXRpb25faGFzX2Vycm9ycyh2b2lkKQp7CXJldHVy
+biBzdG9yZWRfaGFzX2Vycm9yOyB9CmNvbnN0IGNoYXIqIEdhdXNzaWFuQmFja1N1YnN0aXR1dGlv
+bl9nZXRfZXJyb3JzKHZvaWQpCnsJcmV0dXJuIHN0b3JlZF9lcnJvcjsgfQp2b2lkIEdhdXNzaWFu
+QmFja1N1YnN0aXR1dGlvbl9jbGVhcl9lcnJvcnModm9pZCkKewoJZnJlZShzdG9yZWRfZXJyb3Ip
+OwoJc3RvcmVkX2Vycm9yID0gTlVMTDsKCXN0b3JlZF9oYXNfZXJyb3IgPSAwOwp9CgpzdGF0aWMg
+Y2hhciBHYXVzc2lhbkJhY2tTdWJzdGl0dXRpb25fdXNlX3NpbXVsYXRpb25bMTZdOwpzdGF0aWMg
+dm9pZCBHYXVzc2lhbkJhY2tTdWJzdGl0dXRpb25fZGVmX3VzZV9zaW11bGF0aW9uKHZvaWQpCnsK
+CWxvbmcgcGlkID0gKChsb25nKSBnZXRwaWQoKSkgJSAxMDAwMDA7CglzbnByaW50ZihHYXVzc2lh
+bkJhY2tTdWJzdGl0dXRpb25fdXNlX3NpbXVsYXRpb24sIDE2LCAiR2F1c3NpYW5fJTA1bGRfIiwg
+cGlkKTsKfQpzdGF0aWMgY29uc3QgY2hhciAqR2F1c3NpYW5CYWNrU3Vic3RpdHV0aW9uX2NoZWNr
+X3VzZV9zaW11bGF0aW9uKHZvaWQpCnsKCUdhdXNzaWFuQmFja1N1YnN0aXR1dGlvbl9kZWZfdXNl
+X3NpbXVsYXRpb24oKTsKCWNvbnN0IGNoYXIgKnVzZV9zaW0gPSBtYXhfY29uZmlnX2dldF9zdHJp
+bmcoTUFYX0NPTkZJR19VU0VfU0lNVUxBVElPTik7CglpZiAodXNlX3NpbSA9PSBOVUxMKSB7CgkJ
+dXNlX3NpbSA9IEdhdXNzaWFuQmFja1N1YnN0aXR1dGlvbl91c2Vfc2ltdWxhdGlvbjsKCQltYXhf
+Y29uZmlnX3NldF9zdHJpbmcoTUFYX0NPTkZJR19VU0VfU0lNVUxBVElPTiwgdXNlX3NpbSk7Cgl9
+CglyZXR1cm4gdXNlX3NpbTsKfQoKc3RhdGljIGludCBHYXVzc2lhbkJhY2tTdWJzdGl0dXRpb25f
+c2ltdWxhdGlvbl9sYXVuY2ggPSAwOwppbnQgR2F1c3NpYW5CYWNrU3Vic3RpdHV0aW9uX3NpbXVs
+YXRvcl9zdGFydCh2b2lkKQp7CglpbnQgcmV0dmFsID0gMDsKCWNvbnN0IGNoYXIgKnVzZV9zaW0g
+PSBHYXVzc2lhbkJhY2tTdWJzdGl0dXRpb25fY2hlY2tfdXNlX3NpbXVsYXRpb24oKTsKCWNoYXIg
+YnVmZlsxMDI0XTsKCXNucHJpbnRmKGJ1ZmYsIDEwMjQsICJQQVRIPXNpbXV0aWxzOiRQQVRIIG1h
+eGNvbXBpbGVyc2ltIC1kIDEgLW4gJXMgLWMgTUFYNDg0OEEgLVMgc2ltdXRpbHMgcmVzdGFydCIs
+IHVzZV9zaW0pOwoJRklMRSAqcGlwZV9mcCA9IHBvcGVuKGJ1ZmYsICJyIik7CglpZiAocGlwZV9m
+cCA9PSBOVUxMKSB7CgkJc3RybmNhdChidWZmLCAiIDogZmFpbGVkIHRvIGV4ZWN1dGUuIiwgKDEw
+MjQgLSBzdHJsZW4oYnVmZikpKTsKCQlzZXRfZXJyb3IoYnVmZik7CgkJcmV0dXJuIC0xOwoJfQoJ
+d2hpbGUgKGZnZXRzKGJ1ZmYsIDEwMjQsIHBpcGVfZnApICE9IE5VTEwpIHsKCQkvKiBVbmNvbW1l
+bnQgdGhpcyB0byBnZXQgc2ltdWxhdG9yIGNvbW1hbmQgb3V0cHV0ICovCgkJLyogZnByaW50Zihz
+dGRlcnIsIGJ1ZmYpOyAqLwoJCWlmIChzdHJzdHIoYnVmZiwgIkVycm9yIikpIHsKCQkJc2V0X2Vy
+cm9yKGJ1ZmYpOwoJCQlyZXR2YWwgPSAtMTsKCQl9Cgl9CglwY2xvc2UocGlwZV9mcCk7CglyZXR1
+cm4gcmV0dmFsOwp9CgppbnQgR2F1c3NpYW5CYWNrU3Vic3RpdHV0aW9uX3NpbXVsYXRvcl9zdG9w
+KHZvaWQpCnsKCWNvbnN0IGNoYXIgKnVzZV9zaW0gPSBHYXVzc2lhbkJhY2tTdWJzdGl0dXRpb25f
+Y2hlY2tfdXNlX3NpbXVsYXRpb24oKTsKCWNoYXIgYnVmZlsxMDI0XTsKCXNucHJpbnRmKGJ1ZmYs
+IDEwMjQsICJQQVRIPXNpbXV0aWxzOiRQQVRIIG1heGNvbXBpbGVyc2ltIC1kIDEgLW4gJXMgLWMg
+TUFYNDg0OEEgLVMgc2ltdXRpbHMgc3RvcCIsIHVzZV9zaW0pOwoJRklMRSAqcGlwZV9mcCA9IHBv
+cGVuKGJ1ZmYsICJyIik7CglpZiAocGlwZV9mcCA9PSBOVUxMKSB7CgkJc3RybmNhdChidWZmLCAi
+IDogZmFpbGVkIHRvIGV4ZWN1dGUuIiwgKDEwMjQgLSBzdHJsZW4oYnVmZikpKTsKCQlzZXRfZXJy
+b3IoYnVmZik7CgkJcmV0dXJuIC0xOwoJfQoJd2hpbGUgKGZnZXRzKGJ1ZmYsIDEwMjQsIHBpcGVf
+ZnApICE9IE5VTEwpIHsKCQkvKiBVbmNvbW1lbnQgdGhpcyB0byBnZXQgc2ltdWxhdG9yIGNvbW1h
+bmQgb3V0cHV0ICovCgkJLyogZnByaW50ZihzdGRlcnIsIGJ1ZmYpOyAqLwoJCTsKCX0KCXBjbG9z
+ZShwaXBlX2ZwKTsKCXJldHVybiAwOwp9CgpzdGF0aWMgdm9pZCBHYXVzc2lhbkJhY2tTdWJzdGl0
+dXRpb25fc3RhdGljX2luaXQodm9pZCkgCnsKCXN0b3JlZF9tYXhmaWxlID0gR2F1c3NpYW5CYWNr
+U3Vic3RpdHV0aW9uX2luaXQoKTsKCWlmIChzdG9yZWRfbWF4ZmlsZSA9PSBOVUxMIHx8ICFtYXhf
+b2soc3RvcmVkX21heGZpbGUtPmVycm9ycykpIHsKCQlzdG9yZWRfbWF4ZmlsZSA9IE5VTEw7CgkJ
+aWYobWF4X2NvbmZpZ19nZXRfYm9vbChNQVhfQ09ORklHX1NUQVRJQ19JTlRFUkZBQ0VfQUJPUlRf
+T05fRVJST1IpKSBhYm9ydCgpOwoJCWVsc2UgeyBzZXRfZXJyb3IoIlVuYWJsZSB0byBsb2FkIG1h
+eGZpbGUiKTsgcmV0dXJuOyB9Cgl9CglpZighbWF4X29rKG1heF9nbG9iYWxfZXJyb3JzKCkpKSB7
+CgkJc2V0X2Vycm9yX2FuZF9mcmVlKG1heF9lcnJvcnNfdHJhY2UobWF4X2dsb2JhbF9lcnJvcnMo
+KSkpOwoJCXJldHVybjsKCX0KCWlmKCFtYXhfY29uZmlnX2dldF9ib29sKE1BWF9DT05GSUdfU1RB
+VElDX0lOVEVSRkFDRV9BQk9SVF9PTl9FUlJPUikpCgkJbWF4X2Vycm9yc19tb2RlKHN0b3JlZF9t
+YXhmaWxlLT5lcnJvcnMsIDApOwoJdGltZV90IHRpbWVvdXRfcHJldmlvdXMgPSBtYXhfbG9hZF90
+aW1lb3V0KHN0b3JlZF9tYXhmaWxlLCAzMCk7Cgljb25zdCBjaGFyICp1c2Vfc2ltID0gR2F1c3Np
+YW5CYWNrU3Vic3RpdHV0aW9uX2NoZWNrX3VzZV9zaW11bGF0aW9uKCk7CglpZiAobWF4X3Bpbmdf
+ZGFlbW9uKHN0b3JlZF9tYXhmaWxlLCB1c2Vfc2ltKSA9PSAwKSB7CgkJaW50IHNpbV9zdGF0ID0g
+R2F1c3NpYW5CYWNrU3Vic3RpdHV0aW9uX3NpbXVsYXRvcl9zdGFydCgpOwoJCWlmICgoc2ltX3N0
+YXQgPT0gMCkgJiYgKG1heF9waW5nX2RhZW1vbihzdG9yZWRfbWF4ZmlsZSwgdXNlX3NpbSkgPT0g
+MSkpIHsKCQkJR2F1c3NpYW5CYWNrU3Vic3RpdHV0aW9uX3NpbXVsYXRpb25fbGF1bmNoID0gMTsK
+CQl9IGVsc2UgewoJCQlzZXRfZXJyb3IoIkVycm9yOiBBbiBlcnJvciBvY2N1cnJlZCB3aGlsZSB0
+cnlpbmcgdG8gc3RhcnQgdGhlIHNpbXVsYXRpb24gaW5mcmFzdHJ1Y3R1cmUgYXV0b21hdGljYWxs
+eS4iKTsKCQkJc2V0X2Vycm9yKCJFcnJvcjogQ2hlY2sgdGhhdCAndXNlX3NpbXVsYXRpb249PHNp
+bXVsYXRvcl9uYW1lPicgaXMgc2V0IGNvcnJlY3RseSBpbiB5b3VyIFNMaUMgY29uZmlndXJhdGlv
+biIpOwoJCQlzZXRfZXJyb3IoIkVycm9yOiBhbmQgdGhhdCB0aGUgYXNzb2NpYXRlZCBzaW11bGF0
+ZWQgc3lzdGVtIGRhZW1vbiBpcyBydW5uaW5nLiIpOwoJCQltYXhfZmlsZV9mcmVlKHN0b3JlZF9t
+YXhmaWxlKTsKCQkJc3RvcmVkX21heGZpbGUgPSBOVUxMOwoJCQlyZXR1cm47CgkJfQoJfQoJc3Rv
+cmVkX2VuZ2luZSA9IG1heF9sb2FkKHN0b3JlZF9tYXhmaWxlLCAiKiIpOwoJaWYgKCFtYXhfb2so
+c3RvcmVkX21heGZpbGUtPmVycm9ycykpIHsKCQlpZihtYXhfY29uZmlnX2dldF9ib29sKE1BWF9D
+T05GSUdfU1RBVElDX0lOVEVSRkFDRV9BQk9SVF9PTl9FUlJPUikpIHsKCQkJZnByaW50ZihzdGRl
+cnIsICJcblVuYWJsZSB0byBsb2FkIGVuZ2luZTogYWJvcnRpbmcgbm93LlxuXG4iKTsKCQkJZmZs
+dXNoKHN0ZGVycik7CgkJCWFib3J0KCk7CgkJfSBlbHNlIHsKCQkJc2V0X2Vycm9yX2FuZF9mcmVl
+KG1heF9lcnJvcnNfdHJhY2Uoc3RvcmVkX21heGZpbGUtPmVycm9ycykpOwoJCQltYXhfZmlsZV9m
+cmVlKHN0b3JlZF9tYXhmaWxlKTsKCQkJc3RvcmVkX21heGZpbGUgPSBOVUxMOwoJCQlyZXR1cm47
+CgkJfSAKCX0gCgltYXhfbG9hZF90aW1lb3V0KHN0b3JlZF9tYXhmaWxlLCB0aW1lb3V0X3ByZXZp
+b3VzKTsKfQp2b2lkIEdhdXNzaWFuQmFja1N1YnN0aXR1dGlvbl9mcmVlKHZvaWQpCnsKCWlmIChz
+dG9yZWRfZW5naW5lICE9IE5VTEwpIHsKCQltYXhfdW5sb2FkKHN0b3JlZF9lbmdpbmUpOwoJCXN0
+b3JlZF9lbmdpbmUgPSBOVUxMOwoJfQoJaWYgKHN0b3JlZF9tYXhmaWxlICE9IE5VTEwpIHsKCQlt
+YXhfZmlsZV9mcmVlKHN0b3JlZF9tYXhmaWxlKTsKCQlzdG9yZWRfbWF4ZmlsZSA9IE5VTEw7Cgl9
+CglpZiAoc3RvcmVkX2Vycm9yICE9IE5VTEwpIHsKCQlmcmVlKHN0b3JlZF9lcnJvcik7CgkJc3Rv
+cmVkX2Vycm9yID0gTlVMTDsKCX0KCWlmIChHYXVzc2lhbkJhY2tTdWJzdGl0dXRpb25fc2ltdWxh
+dGlvbl9sYXVuY2ggPT0gMSkgewoJCWludCBzaW1fc3RhdCA9IEdhdXNzaWFuQmFja1N1YnN0aXR1
+dGlvbl9zaW11bGF0b3Jfc3RvcCgpOwoJCWlmIChzaW1fc3RhdCAhPSAwICkgewoJCQlmcHJpbnRm
+KHN0ZGVyciwgIkVycm9yIHN0b3BwaW5nIHNpbXVsYXRvci4iKTsKCQl9CgkJR2F1c3NpYW5CYWNr
+U3Vic3RpdHV0aW9uX3NpbXVsYXRpb25fbGF1bmNoID0gMDsKCX0KfQoKc3RhdGljIGludCBHYXVz
+c2lhbkJhY2tTdWJzdGl0dXRpb25fZ2V0X3BjaWVfYWxpZ25tZW50KHZvaWQpCnsKI2lmZGVmIEdh
+dXNzaWFuQmFja1N1YnN0aXR1dGlvbl9QQ0lFX0FMSUdOTUVOVAoJcmV0dXJuICgoR2F1c3NpYW5C
+YWNrU3Vic3RpdHV0aW9uX1BDSUVfQUxJR05NRU5UIDwgMSkgPyAxNiA6IEdhdXNzaWFuQmFja1N1
+YnN0aXR1dGlvbl9QQ0lFX0FMSUdOTUVOVCk7CiNlbHNlCglyZXR1cm4gMTY7CiNlbmRpZgp9Cgpz
+dGF0aWMgaW50IEdhdXNzaWFuQmFja1N1YnN0aXR1dGlvbl9jaGVja19hbGlnbmVkKGNvbnN0IHZv
+aWQgKmRhdGEpCnsKCXVpbnRwdHJfdCBwb2ludGVyID0gKHVpbnRwdHJfdCkgZGF0YTsKCWludCBh
+bGlnbm1lbnQgPSBHYXVzc2lhbkJhY2tTdWJzdGl0dXRpb25fZ2V0X3BjaWVfYWxpZ25tZW50KCk7
+CglyZXR1cm4gKHBvaW50ZXIgJSBhbGlnbm1lbnQpID8gMSA6IDA7Cn0KCnN0YXRpYyB2b2lkICpH
+YXVzc2lhbkJhY2tTdWJzdGl0dXRpb25fbWFsbG9jX2FsaWduZWQoY29uc3Qgc2l6ZV90IHNpemUp
+CnsKCXZvaWQgKnB0cjsKCWludCBhbGlnbm1lbnQgPSBHYXVzc2lhbkJhY2tTdWJzdGl0dXRpb25f
+Z2V0X3BjaWVfYWxpZ25tZW50KCk7Cglwb3NpeF9tZW1hbGlnbigmcHRyLCBhbGlnbm1lbnQsIHNp
+emUpOwoJcmV0dXJuIHB0cjsKfQoKCgovKi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0qLwovKi0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0gSW50ZXJmYWNlIGRlZmF1bHQgLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0qLwovKi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0qLwoKCgojZGVmaW5lIENIRUNLX0VS
+Uk9SU19TVChTVCwgUkVUKSBpZighbWF4X29rKFNULT5lcnJvcnMpKSB7IGlmKG1heF9jb25maWdf
+Z2V0X2Jvb2woTUFYX0NPTkZJR19TVEFUSUNfSU5URVJGQUNFX0FCT1JUX09OX0VSUk9SKSkgeyBm
+cHJpbnRmKHN0ZGVyciwgIiVzXG4iLCBtYXhfZXJyb3JzX3RyYWNlKFNULT5lcnJvcnMpKTsgYWJv
+cnQoKTsgfSBzZXRfZXJyb3JfYW5kX2ZyZWUobWF4X2Vycm9yc190cmFjZShTVC0+ZXJyb3JzKSk7
+IHJldHVybiBSRVQ7IH0gCiNkZWZpbmUgQ0hFQ0tfTlVMTChWQUxVRSwgTUVTU0FHRSwgUkVUKSBp
+ZihWQUxVRSA9PSBOVUxMKSB7IGlmIChtYXhfY29uZmlnX2dldF9ib29sKE1BWF9DT05GSUdfU1RB
+VElDX0lOVEVSRkFDRV9BQk9SVF9PTl9FUlJPUikpIHsgZnByaW50ZihzdGRlcnIsICIlc1xuJXNc
+biIsIChzdG9yZWRfZXJyb3IgPT0gTlVMTCkgPyAiIiA6IHN0b3JlZF9lcnJvciwgTUVTU0FHRSk7
+IGFib3J0KCk7IH0gc2V0X2Vycm9yKE1FU1NBR0UpOyByZXR1cm4gUkVUOyB9CgogCnR5cGVkZWYg
+c3RydWN0IEdhdXNzaWFuQmFja1N1YnN0aXR1dGlvbl9jYWxsYmFja19zdHJlYW0gewoJdWludDhf
+dCAqdXNlcl9wdHI7Cgl1aW50OF90ICphbGlnbmVkX3B0cjsKCXNpemVfdCAgIHNpemU7CglpbnQg
+ICAgICBpc19vdXRwdXQ7Cn0gR2F1c3NpYW5CYWNrU3Vic3RpdHV0aW9uX2NhbGxiYWNrX3N0cmVh
+bV90OwoKdHlwZWRlZiBzdHJ1Y3QgR2F1c3NpYW5CYWNrU3Vic3RpdHV0aW9uX2NhbGxiYWNrX2Rh
+dGEgewoJR2F1c3NpYW5CYWNrU3Vic3RpdHV0aW9uX2NhbGxiYWNrX3N0cmVhbV90IHN0cmVhbVsz
+XTsgCglpbnQgY291bnQ7CglpbnQgbWF4X2NvdW50Owp9IEdhdXNzaWFuQmFja1N1YnN0aXR1dGlv
+bl9jYWxsYmFja19kYXRhX3Q7CgpzdGF0aWMgdm9pZCBHYXVzc2lhbkJhY2tTdWJzdGl0dXRpb25f
+Y2FsbGJhY2tfaW50ZXJuYWwodm9pZCAqY2JfZGF0YSkKewoJR2F1c3NpYW5CYWNrU3Vic3RpdHV0
+aW9uX2NhbGxiYWNrX2RhdGFfdCAqZGF0YSA9IChHYXVzc2lhbkJhY2tTdWJzdGl0dXRpb25fY2Fs
+bGJhY2tfZGF0YV90KikgY2JfZGF0YTsKCWZvciAoaW50IGkgPSAwIDsgaSA8IGRhdGEtPmNvdW50
+IDsgaSsrICkgewoJCUdhdXNzaWFuQmFja1N1YnN0aXR1dGlvbl9jYWxsYmFja19zdHJlYW1fdCAq
+cyA9ICZkYXRhLT5zdHJlYW1baV07CgkJaWYgKHMtPmlzX291dHB1dCAmJiAocy0+c2l6ZSA+IDAp
+KSB7CgkJCW1lbWNweShzLT51c2VyX3B0ciwgcy0+YWxpZ25lZF9wdHIsIHMtPnNpemUpOwoJCX0K
+CQlmcmVlKHMtPmFsaWduZWRfcHRyKTsKCX0KCWZyZWUoZGF0YSk7Cn0KCnN0YXRpYyBtYXhfYWN0
+aW9uc190KiBHYXVzc2lhbkJhY2tTdWJzdGl0dXRpb25fY29udmVydF9pbnRlcm5hbCgKCW1heF9m
+aWxlX3QgKm1heGZpbGUsCglHYXVzc2lhbkJhY2tTdWJzdGl0dXRpb25fYWN0aW9uc190ICppbnRl
+cmZhY2VfYWN0aW9ucywKCWludCAgaXNfaW50ZXJuYWxfY2FsbCwKCXZvaWQgKCoqY2FsbGJhY2tf
+ZnVuYykodm9pZCopLAoJdm9pZCAqKmNhbGxiYWNrX2RhdGEpCnsKCW1heF9hY3Rpb25zX3QgKmFj
+dGlvbnMgPSBtYXhfYWN0aW9uc19pbml0KG1heGZpbGUsIE5VTEwpOwoJaWYoYWN0aW9ucyA9PSBO
+VUxMKSByZXR1cm4gTlVMTDsKCiNkZWZpbmUgQ0hFQ0tfRVJST1JTIGlmKCFtYXhfb2soYWN0aW9u
+cy0+ZXJyb3JzKSkgeyBzZXRfZXJyb3JfYW5kX2ZyZWUobWF4X2Vycm9yc190cmFjZShhY3Rpb25z
+LT5lcnJvcnMpKTsgcmV0dXJuIE5VTEw7IH0gCgoJR2F1c3NpYW5CYWNrU3Vic3RpdHV0aW9uX2Nh
+bGxiYWNrX2RhdGFfdCAqY2JfZGF0YSA9IE5VTEw7CglpbnQgdXNlX2NhbGxiYWNrID0gKGNhbGxi
+YWNrX2Z1bmMgIT0gTlVMTCkgJiYgKGNhbGxiYWNrX2RhdGEgIT0gTlVMTCk7CglpZiAodXNlX2Nh
+bGxiYWNrKSB7CgkJY2JfZGF0YSA9IG1hbGxvYyhzaXplb2YoR2F1c3NpYW5CYWNrU3Vic3RpdHV0
+aW9uX2NhbGxiYWNrX2RhdGFfdCkpOwoJCWlmIChjYl9kYXRhID09IE5VTEwpIHsKCQkJZnByaW50
+ZihzdGRlcnIsICJVbmFibGUgdG8gYWxsb2NhdGUgbWVtb3J5IGZvciBzdHJlYW0gY2FsbGJhY2sg
+ZGF0YSBpbiBmdW5jdGlvbiBHYXVzc2lhbkJhY2tTdWJzdGl0dXRpb25fY29udmVydF9pbnRlcm5h
+bFxuIik7CgkJCXJldHVybiBOVUxMOwoJCX0KCQljYl9kYXRhLT5tYXhfY291bnQgPSAzOwoJCWNi
+X2RhdGEtPmNvdW50ICAgICA9IDA7CgkJKmNhbGxiYWNrX2RhdGEgICAgID0gY2JfZGF0YTsKCQkq
+Y2FsbGJhY2tfZnVuYyAgICAgPSAmR2F1c3NpYW5CYWNrU3Vic3RpdHV0aW9uX2NhbGxiYWNrX2lu
+dGVybmFsOwoJfQoKCWludDMyX3QgcGFyYW1fTiA9IGludGVyZmFjZV9hY3Rpb25zLT5wYXJhbV9O
+OwoJCgkvKiBjb2RlIGZvciBzY2FsYXIgR2F1c3NpYW5CYWNrU3Vic3RpdHV0aW9uS2VybmVsLnJ1
+bl9jeWNsZV9jb3VudCAqLwoJdWludDY0X3QgdGlja3NfR2F1c3NpYW5CYWNrU3Vic3RpdHV0aW9u
+S2VybmVsID0gcGFyYW1fTjsKCW1heF9zZXRfdGlja3MoYWN0aW9ucywgIkdhdXNzaWFuQmFja1N1
+YnN0aXR1dGlvbktlcm5lbCIsIHBhcmFtX04pOwoJQ0hFQ0tfRVJST1JTOwoJLyogZW5kIG9mIGNv
+ZGUgZm9yIHNjYWxhciBHYXVzc2lhbkJhY2tTdWJzdGl0dXRpb25LZXJuZWwucnVuX2N5Y2xlX2Nv
+dW50Ki8KCQoJaW50NjRfdCB0bXBfMCA9ICgocGFyYW1fTiAqIDQpICogNCk7CgkKCS8qIGNvZGUg
+Zm9yIHN0cmVhbSBpblZlY3RvciAqLwoJc2l6ZV90IGluc3RyZWFtX3NpemVfaW5WZWN0b3IgPSB0
+bXBfMDsKCWlmIChpbnN0cmVhbV9zaXplX2luVmVjdG9yID4gMCkgewoJCWNvbnN0IGZsb2F0ICpz
+dHJlYW1fcHRyID0gaW50ZXJmYWNlX2FjdGlvbnMtPmluc3RyZWFtX2luVmVjdG9yOwoJCWlmICh1
+c2VfY2FsbGJhY2sgJiYgKDEgPT0gR2F1c3NpYW5CYWNrU3Vic3RpdHV0aW9uX2NoZWNrX2FsaWdu
+ZWQoaW50ZXJmYWNlX2FjdGlvbnMtPmluc3RyZWFtX2luVmVjdG9yKSkpIHsKCQkJZmxvYXQgKmFs
+aWduZWRfaW5zdHJlYW1faW5WZWN0b3IgPSBtYWxsb2MoaW5zdHJlYW1fc2l6ZV9pblZlY3Rvcik7
+CgkJCWlmIChhbGlnbmVkX2luc3RyZWFtX2luVmVjdG9yID09IE5VTEwpIHsKCQkJCW1heF9yZXBv
+cnRfZXJyb3Jfc2xpYyhhY3Rpb25zLT5lcnJvcnMsIF9fRklMRV9fLCBfX0xJTkVfXywgNTI2LCAi
+RmFpbGVkIHRvIGFsbG9jYXRlIGFsaWduZWQgbWVtb3J5IGZvciBzdHJlYW0gJ2luVmVjdG9yJyIp
+OwoJCQkJQ0hFQ0tfRVJST1JTOwoJCQl9CgkJCSgmY2JfZGF0YS0+c3RyZWFtW2NiX2RhdGEtPmNv
+dW50XSktPnVzZXJfcHRyICAgID0gKHVpbnQ4X3QqKSBpbnRlcmZhY2VfYWN0aW9ucy0+aW5zdHJl
+YW1faW5WZWN0b3I7CgkJCSgmY2JfZGF0YS0+c3RyZWFtW2NiX2RhdGEtPmNvdW50XSktPmFsaWdu
+ZWRfcHRyID0gKHVpbnQ4X3QqKSBhbGlnbmVkX2luc3RyZWFtX2luVmVjdG9yOwoJCQkoJmNiX2Rh
+dGEtPnN0cmVhbVtjYl9kYXRhLT5jb3VudF0pLT5zaXplICAgICAgICA9IGluc3RyZWFtX3NpemVf
+aW5WZWN0b3I7CgkJCSgmY2JfZGF0YS0+c3RyZWFtW2NiX2RhdGEtPmNvdW50XSktPmlzX291dHB1
+dCAgID0gMDsKCQkJY2JfZGF0YS0+Y291bnQgKz0gMTsKCQkJbWVtY3B5KGFsaWduZWRfaW5zdHJl
+YW1faW5WZWN0b3IsIGludGVyZmFjZV9hY3Rpb25zLT5pbnN0cmVhbV9pblZlY3RvciwgaW5zdHJl
+YW1fc2l6ZV9pblZlY3Rvcik7CgkJCXN0cmVhbV9wdHIgPSBhbGlnbmVkX2luc3RyZWFtX2luVmVj
+dG9yOwoJCX0KCQltYXhfcXVldWVfaW5wdXQoYWN0aW9ucywgImluVmVjdG9yIiwgc3RyZWFtX3B0
+ciwgaW5zdHJlYW1fc2l6ZV9pblZlY3Rvcik7CgkJQ0hFQ0tfRVJST1JTOwoJfQoJLyogZW5kIG9m
+IGNvZGUgZm9yIHN0cmVhbSBpblZlY3RvciAqLwoJCglpbnQ2NF90IHRtcF8xID0gKChwYXJhbV9O
+ICogNCkgKiA0KTsKCQoJLyogY29kZSBmb3Igc3RyZWFtIGluVmVjdG9yMSAqLwoJc2l6ZV90IGlu
+c3RyZWFtX3NpemVfaW5WZWN0b3IxID0gdG1wXzE7CglpZiAoaW5zdHJlYW1fc2l6ZV9pblZlY3Rv
+cjEgPiAwKSB7CgkJY29uc3QgZmxvYXQgKnN0cmVhbV9wdHIgPSBpbnRlcmZhY2VfYWN0aW9ucy0+
+aW5zdHJlYW1faW5WZWN0b3IxOwoJCWlmICh1c2VfY2FsbGJhY2sgJiYgKDEgPT0gR2F1c3NpYW5C
+YWNrU3Vic3RpdHV0aW9uX2NoZWNrX2FsaWduZWQoaW50ZXJmYWNlX2FjdGlvbnMtPmluc3RyZWFt
+X2luVmVjdG9yMSkpKSB7CgkJCWZsb2F0ICphbGlnbmVkX2luc3RyZWFtX2luVmVjdG9yMSA9IG1h
+bGxvYyhpbnN0cmVhbV9zaXplX2luVmVjdG9yMSk7CgkJCWlmIChhbGlnbmVkX2luc3RyZWFtX2lu
+VmVjdG9yMSA9PSBOVUxMKSB7CgkJCQltYXhfcmVwb3J0X2Vycm9yX3NsaWMoYWN0aW9ucy0+ZXJy
+b3JzLCBfX0ZJTEVfXywgX19MSU5FX18sIDUyNiwgIkZhaWxlZCB0byBhbGxvY2F0ZSBhbGlnbmVk
+IG1lbW9yeSBmb3Igc3RyZWFtICdpblZlY3RvcjEnIik7CgkJCQlDSEVDS19FUlJPUlM7CgkJCX0K
+CQkJKCZjYl9kYXRhLT5zdHJlYW1bY2JfZGF0YS0+Y291bnRdKS0+dXNlcl9wdHIgICAgPSAodWlu
+dDhfdCopIGludGVyZmFjZV9hY3Rpb25zLT5pbnN0cmVhbV9pblZlY3RvcjE7CgkJCSgmY2JfZGF0
+YS0+c3RyZWFtW2NiX2RhdGEtPmNvdW50XSktPmFsaWduZWRfcHRyID0gKHVpbnQ4X3QqKSBhbGln
+bmVkX2luc3RyZWFtX2luVmVjdG9yMTsKCQkJKCZjYl9kYXRhLT5zdHJlYW1bY2JfZGF0YS0+Y291
+bnRdKS0+c2l6ZSAgICAgICAgPSBpbnN0cmVhbV9zaXplX2luVmVjdG9yMTsKCQkJKCZjYl9kYXRh
+LT5zdHJlYW1bY2JfZGF0YS0+Y291bnRdKS0+aXNfb3V0cHV0ICAgPSAwOwoJCQljYl9kYXRhLT5j
+b3VudCArPSAxOwoJCQltZW1jcHkoYWxpZ25lZF9pbnN0cmVhbV9pblZlY3RvcjEsIGludGVyZmFj
+ZV9hY3Rpb25zLT5pbnN0cmVhbV9pblZlY3RvcjEsIGluc3RyZWFtX3NpemVfaW5WZWN0b3IxKTsK
+CQkJc3RyZWFtX3B0ciA9IGFsaWduZWRfaW5zdHJlYW1faW5WZWN0b3IxOwoJCX0KCQltYXhfcXVl
+dWVfaW5wdXQoYWN0aW9ucywgImluVmVjdG9yMSIsIHN0cmVhbV9wdHIsIGluc3RyZWFtX3NpemVf
+aW5WZWN0b3IxKTsKCQlDSEVDS19FUlJPUlM7Cgl9CgkvKiBlbmQgb2YgY29kZSBmb3Igc3RyZWFt
+IGluVmVjdG9yMSAqLwoJCglpbnQ2NF90IHRtcF8yID0gKChwYXJhbV9OICogNCkgKiA0KTsKCQoJ
+LyogY29kZSBmb3Igc3RyZWFtIG91dFZlY3RvciAqLwoJc2l6ZV90IG91dHN0cmVhbV9zaXplX291
+dFZlY3RvciA9IHRtcF8yOwoJaWYgKG91dHN0cmVhbV9zaXplX291dFZlY3RvciA+IDApIHsKCQlm
+bG9hdCAqc3RyZWFtX3B0ciA9IGludGVyZmFjZV9hY3Rpb25zLT5vdXRzdHJlYW1fb3V0VmVjdG9y
+OwoJCWlmICh1c2VfY2FsbGJhY2sgJiYgKDEgPT0gR2F1c3NpYW5CYWNrU3Vic3RpdHV0aW9uX2No
+ZWNrX2FsaWduZWQoaW50ZXJmYWNlX2FjdGlvbnMtPm91dHN0cmVhbV9vdXRWZWN0b3IpKSkgewoJ
+CQlmbG9hdCAqYWxpZ25lZF9vdXRzdHJlYW1fb3V0VmVjdG9yID0gbWFsbG9jKG91dHN0cmVhbV9z
+aXplX291dFZlY3Rvcik7CgkJCWlmIChhbGlnbmVkX291dHN0cmVhbV9vdXRWZWN0b3IgPT0gTlVM
+TCkgewoJCQkJbWF4X3JlcG9ydF9lcnJvcl9zbGljKGFjdGlvbnMtPmVycm9ycywgX19GSUxFX18s
+IF9fTElORV9fLCA1MjYsICJGYWlsZWQgdG8gYWxsb2NhdGUgYWxpZ25lZCBtZW1vcnkgZm9yIHN0
+cmVhbSAnb3V0VmVjdG9yJyIpOwoJCQkJQ0hFQ0tfRVJST1JTOwoJCQl9CgkJCSgmY2JfZGF0YS0+
+c3RyZWFtW2NiX2RhdGEtPmNvdW50XSktPnVzZXJfcHRyICAgID0gKHVpbnQ4X3QqKSBpbnRlcmZh
+Y2VfYWN0aW9ucy0+b3V0c3RyZWFtX291dFZlY3RvcjsKCQkJKCZjYl9kYXRhLT5zdHJlYW1bY2Jf
+ZGF0YS0+Y291bnRdKS0+YWxpZ25lZF9wdHIgPSAodWludDhfdCopIGFsaWduZWRfb3V0c3RyZWFt
+X291dFZlY3RvcjsKCQkJKCZjYl9kYXRhLT5zdHJlYW1bY2JfZGF0YS0+Y291bnRdKS0+c2l6ZSAg
+ICAgICAgPSBvdXRzdHJlYW1fc2l6ZV9vdXRWZWN0b3I7CgkJCSgmY2JfZGF0YS0+c3RyZWFtW2Ni
+X2RhdGEtPmNvdW50XSktPmlzX291dHB1dCAgID0gMTsKCQkJY2JfZGF0YS0+Y291bnQgKz0gMTsK
+CQkJc3RyZWFtX3B0ciA9IGFsaWduZWRfb3V0c3RyZWFtX291dFZlY3RvcjsKCQl9CgkJbWF4X3F1
+ZXVlX291dHB1dChhY3Rpb25zLCAib3V0VmVjdG9yIiwgc3RyZWFtX3B0ciwgb3V0c3RyZWFtX3Np
+emVfb3V0VmVjdG9yKTsKCQlDSEVDS19FUlJPUlM7Cgl9CgkvKiBlbmQgb2YgY29kZSBmb3Igc3Ry
+ZWFtIG91dFZlY3RvciAqLwoJCglpZiAodXNlX2NhbGxiYWNrICYmIGNiX2RhdGEtPmNvdW50ID09
+IDApIHsKCQkqY2FsbGJhY2tfZGF0YSA9IE5VTEw7CgkJKmNhbGxiYWNrX2Z1bmMgPSBOVUxMOwoJ
+CWZyZWUoY2JfZGF0YSk7Cgl9CglyZXR1cm4gYWN0aW9uczsKI3VuZGVmIENIRUNLX0VSUk9SUwp9
+Cgp2b2lkIEdhdXNzaWFuQmFja1N1YnN0aXR1dGlvbigKCWludDMyX3QgcGFyYW1fTiwKCWNvbnN0
+IGZsb2F0ICppbnN0cmVhbV9pblZlY3RvciwKCWNvbnN0IGZsb2F0ICppbnN0cmVhbV9pblZlY3Rv
+cjEsCglmbG9hdCAqb3V0c3RyZWFtX291dFZlY3RvcikKewoJKHZvaWQpIHB0aHJlYWRfb25jZSgm
+c2xpY19ic19pc19pbml0aWFsaXNlZCwgR2F1c3NpYW5CYWNrU3Vic3RpdHV0aW9uX3N0YXRpY19p
+bml0KTsKCUNIRUNLX05VTEwoc3RvcmVkX21heGZpbGUsICJNYXhmaWxlIHdhcyBub3QgbG9hZGVk
+IiwgKTsKCW1heF9ydW5fdCAqcnVuID0gR2F1c3NpYW5CYWNrU3Vic3RpdHV0aW9uX25vbmJsb2Nr
+KHBhcmFtX04sIGluc3RyZWFtX2luVmVjdG9yLCBpbnN0cmVhbV9pblZlY3RvcjEsIG91dHN0cmVh
+bV9vdXRWZWN0b3IpOwoJQ0hFQ0tfTlVMTChydW4sICJVbmFibGUgdG8gcnVuIGFjdGlvbnMiLCAp
+OwoJbWF4X3dhaXQocnVuKTsKfQoKbWF4X3J1bl90ICpHYXVzc2lhbkJhY2tTdWJzdGl0dXRpb25f
+bm9uYmxvY2soCglpbnQzMl90IHBhcmFtX04sCgljb25zdCBmbG9hdCAqaW5zdHJlYW1faW5WZWN0
+b3IsCgljb25zdCBmbG9hdCAqaW5zdHJlYW1faW5WZWN0b3IxLAoJZmxvYXQgKm91dHN0cmVhbV9v
+dXRWZWN0b3IpCnsKCUdhdXNzaWFuQmFja1N1YnN0aXR1dGlvbl9hY3Rpb25zX3QgaW50ZXJmYWNl
+X2FjdGlvbnM7CglpbnRlcmZhY2VfYWN0aW9ucy5wYXJhbV9OID0gcGFyYW1fTjsKCWludGVyZmFj
+ZV9hY3Rpb25zLmluc3RyZWFtX2luVmVjdG9yID0gaW5zdHJlYW1faW5WZWN0b3I7CglpbnRlcmZh
+Y2VfYWN0aW9ucy5pbnN0cmVhbV9pblZlY3RvcjEgPSBpbnN0cmVhbV9pblZlY3RvcjE7CglpbnRl
+cmZhY2VfYWN0aW9ucy5vdXRzdHJlYW1fb3V0VmVjdG9yID0gb3V0c3RyZWFtX291dFZlY3RvcjsK
+CSh2b2lkKSBwdGhyZWFkX29uY2UoJnNsaWNfYnNfaXNfaW5pdGlhbGlzZWQsIEdhdXNzaWFuQmFj
+a1N1YnN0aXR1dGlvbl9zdGF0aWNfaW5pdCk7CglDSEVDS19OVUxMKHN0b3JlZF9tYXhmaWxlLCAi
+TWF4ZmlsZSB3YXMgbm90IGxvYWRlZCIsIE5VTEwpOwoJdm9pZCAoKmNiX2Z1bmMpKHZvaWQqKSA9
+IE5VTEw7Cgl2b2lkICAqY2JfZGF0YSAgICAgICAgID0gTlVMTDsKCW1heF9hY3Rpb25zX3QgKmFj
+dGlvbnMgPSBHYXVzc2lhbkJhY2tTdWJzdGl0dXRpb25fY29udmVydF9pbnRlcm5hbChzdG9yZWRf
+bWF4ZmlsZSwgJmludGVyZmFjZV9hY3Rpb25zLCAxLCAmY2JfZnVuYywgJmNiX2RhdGEpOwoJQ0hF
+Q0tfTlVMTChhY3Rpb25zLCAiVW5hYmxlIHRvIGJ1aWxkIGFjdGlvbnMiLCBOVUxMKTsKCW1heF92
+YWxpZGF0ZShhY3Rpb25zKTsKCUNIRUNLX0VSUk9SU19TVChhY3Rpb25zLCBOVUxMKTsKCUNIRUNL
+X0VSUk9SU19TVChzdG9yZWRfZW5naW5lLCBOVUxMKTsKCW1heF9ydW5fdCAqcnVuOwoJaWYgKGNi
+X2Z1bmMgPT0gTlVMTCkgewoJCXJ1biA9IG1heF9ydW5fbm9uYmxvY2soc3RvcmVkX2VuZ2luZSwg
+YWN0aW9ucyk7Cgl9IGVsc2UgewoJCXJ1biA9IG1heF9ydW5fbm9uYmxvY2tfd2l0aF9jYihzdG9y
+ZWRfZW5naW5lLCBhY3Rpb25zLCBjYl9mdW5jLCBjYl9kYXRhKTsKCX0KCUNIRUNLX05VTEwocnVu
+LCAiVW5hYmxlIHRvIHJ1biBhY3Rpb25zIiwgTlVMTCk7CglDSEVDS19FUlJPUlNfU1QoYWN0aW9u
+cywgTlVMTCk7CgltYXhfYWN0aW9uc19mcmVlKGFjdGlvbnMpOwoJcmV0dXJuIHJ1bjsKfQoKdm9p
+ZCBHYXVzc2lhbkJhY2tTdWJzdGl0dXRpb25fcnVuKAoJbWF4X2VuZ2luZV90ICplbmdpbmUsCglH
+YXVzc2lhbkJhY2tTdWJzdGl0dXRpb25fYWN0aW9uc190ICppbnRlcmZhY2VfYWN0aW9ucykKewoJ
+bWF4X3J1bl90ICpydW4gPSBHYXVzc2lhbkJhY2tTdWJzdGl0dXRpb25fcnVuX25vbmJsb2NrKGVu
+Z2luZSwgaW50ZXJmYWNlX2FjdGlvbnMpOwoJQ0hFQ0tfTlVMTChydW4sICJVbmFibGUgdG8gcnVu
+IGFjdGlvbnMiLCApOwoJbWF4X3dhaXQocnVuKTsKfQoKbWF4X3J1bl90ICpHYXVzc2lhbkJhY2tT
+dWJzdGl0dXRpb25fcnVuX25vbmJsb2NrKAoJbWF4X2VuZ2luZV90ICplbmdpbmUsCglHYXVzc2lh
+bkJhY2tTdWJzdGl0dXRpb25fYWN0aW9uc190ICppbnRlcmZhY2VfYWN0aW9ucykKewoJbWF4X2Zp
+bGVfdCAqbWF4ZmlsZSA9IG1heF9lbmdpbmVfZ2V0X21heF9maWxlKGVuZ2luZSk7IAoJdm9pZCAo
+KmNiX2Z1bmMpKHZvaWQqKSA9IE5VTEw7Cgl2b2lkICAqY2JfZGF0YSAgICAgICAgID0gTlVMTDsK
+CW1heF9hY3Rpb25zX3QgKmFjdGlvbnMgPSBHYXVzc2lhbkJhY2tTdWJzdGl0dXRpb25fY29udmVy
+dF9pbnRlcm5hbChtYXhmaWxlLCBpbnRlcmZhY2VfYWN0aW9ucywgMSwgJmNiX2Z1bmMsICZjYl9k
+YXRhKTsKCUNIRUNLX05VTEwoYWN0aW9ucywgIlVuYWJsZSB0byBidWlsZCBhY3Rpb25zIiwgTlVM
+TCk7CgltYXhfdmFsaWRhdGUoYWN0aW9ucyk7CglDSEVDS19FUlJPUlNfU1QoYWN0aW9ucywgTlVM
+TCk7CgltYXhfcnVuX3QgKnJ1bjsKCWlmIChjYl9mdW5jID09IE5VTEwpIHsKCQlydW4gPSBtYXhf
+cnVuX25vbmJsb2NrKGVuZ2luZSwgYWN0aW9ucyk7Cgl9IGVsc2UgewoJCXJ1biA9IG1heF9ydW5f
+bm9uYmxvY2tfd2l0aF9jYihlbmdpbmUsIGFjdGlvbnMsIGNiX2Z1bmMsIGNiX2RhdGEpOwoJfQoJ
+Q0hFQ0tfTlVMTChydW4sICJVbmFibGUgdG8gcnVuIGFjdGlvbnMiLCBOVUxMKTsKCW1heF9hY3Rp
+b25zX2ZyZWUoYWN0aW9ucyk7CglyZXR1cm4gcnVuOwp9CgoKLyoqCiAqIFxicmllZiBHcm91cCBy
+dW4gYWR2YW5jZWQgc3RhdGljIGZ1bmN0aW9uIGZvciB0aGUgaW50ZXJmYWNlICdkZWZhdWx0Jy4K
+ICogCiAqIFxwYXJhbSBbaW5dIGdyb3VwIEdyb3VwIHRvIHVzZS4KICogXHBhcmFtIFtpbixvdXRd
+IGludGVyZmFjZV9hY3Rpb25zIEFjdGlvbnMgdG8gcnVuLgogKgogKiBSdW4gdGhlIGFjdGlvbnMg
+b24gdGhlIGZpcnN0IGRldmljZSBhdmFpbGFibGUgaW4gdGhlIGdyb3VwLgogKi8Kdm9pZCBHYXVz
+c2lhbkJhY2tTdWJzdGl0dXRpb25fcnVuX2dyb3VwKG1heF9ncm91cF90ICpncm91cCwgR2F1c3Np
+YW5CYWNrU3Vic3RpdHV0aW9uX2FjdGlvbnNfdCAqaW50ZXJmYWNlX2FjdGlvbnMpCnsKCW1heF9y
+dW5fdCAqcnVuID0gR2F1c3NpYW5CYWNrU3Vic3RpdHV0aW9uX3J1bl9ncm91cF9ub25ibG9jayhn
+cm91cCwgaW50ZXJmYWNlX2FjdGlvbnMpOwoJQ0hFQ0tfTlVMTChydW4sICJVbmFibGUgdG8gcnVu
+IGFjdGlvbnMiLCApOwoJbWF4X3dhaXQocnVuKTsKfQoKCi8qKgogKiBcYnJpZWYgR3JvdXAgcnVu
+IGFkdmFuY2VkIHN0YXRpYyBub24tYmxvY2tpbmcgZnVuY3Rpb24gZm9yIHRoZSBpbnRlcmZhY2Ug
+J2RlZmF1bHQnLgogKiAKICoKICogU2NoZWR1bGUgdGhlIGFjdGlvbnMgdG8gcnVuIG9uIHRoZSBm
+aXJzdCBkZXZpY2UgYXZhaWxhYmxlIGluIHRoZSBncm91cCBhbmQgcmV0dXJuIGltbWVkaWF0ZWx5
+LgogKiBUaGUgc3RhdHVzIG9mIHRoZSBydW4gbXVzdCBiZSBjaGVja2VkIHdpdGggOjptYXhfd2Fp
+dC4gCiAqIE5vdGUgdGhhdCB1c2Ugb2YgOjptYXhfbm93YWl0IGlzIHByb2hpYml0ZWQgd2l0aCBu
+b24tYmxvY2tpbmcgcnVubmluZyBvbiBncm91cHM6CiAqIHNlZSB0aGUgOjptYXhfcnVuX2dyb3Vw
+X25vbmJsb2NrIGRvY3VtZW50YXRpb24gZm9yIG1vcmUgZXhwbGFuYXRpb24uCiAqCiAqIFxwYXJh
+bSBbaW5dIGdyb3VwIEdyb3VwIHRvIHVzZS4KICogXHBhcmFtIFtpbl0gaW50ZXJmYWNlX2FjdGlv
+bnMgQWN0aW9ucyB0byBydW4uCiAqIFxyZXR1cm4gQSBoYW5kbGUgb24gdGhlIGV4ZWN1dGlvbiBz
+dGF0dXMgb2YgdGhlIGFjdGlvbnMsIG9yIE5VTEwgaW4gY2FzZSBvZiBlcnJvci4KICovCm1heF9y
+dW5fdCAqR2F1c3NpYW5CYWNrU3Vic3RpdHV0aW9uX3J1bl9ncm91cF9ub25ibG9jayhtYXhfZ3Jv
+dXBfdCAqZ3JvdXAsIEdhdXNzaWFuQmFja1N1YnN0aXR1dGlvbl9hY3Rpb25zX3QgKmludGVyZmFj
+ZV9hY3Rpb25zKQp7CgltYXhfZmlsZV90ICptYXhmaWxlID0gbWF4X2dyb3VwX2dldF9tYXhfZmls
+ZShncm91cCk7CgltYXhfYWN0aW9uc190ICphY3Rpb25zID0gR2F1c3NpYW5CYWNrU3Vic3RpdHV0
+aW9uX2NvbnZlcnRfaW50ZXJuYWwobWF4ZmlsZSwgaW50ZXJmYWNlX2FjdGlvbnMsIDEsIE5VTEws
+IE5VTEwpOwoJaWYoYWN0aW9ucyA9PSBOVUxMKSByZXR1cm4gTlVMTDsKCWlmKCFtYXhfb2soYWN0
+aW9ucy0+ZXJyb3JzKSkgcmV0dXJuIE5VTEw7CgltYXhfdmFsaWRhdGUoYWN0aW9ucyk7CgltYXhf
+cnVuX3QgKnJ1biA9IG1heF9ydW5fZ3JvdXBfbm9uYmxvY2soZ3JvdXAsIGFjdGlvbnMpOwoJbWF4
+X2FjdGlvbnNfZnJlZShhY3Rpb25zKTsKCXJldHVybiBydW47Cn0KCgovKioKICogXGJyaWVmIEFy
+cmF5IHJ1biBhZHZhbmNlZCBzdGF0aWMgZnVuY3Rpb24gZm9yIHRoZSBpbnRlcmZhY2UgJ2RlZmF1
+bHQnLgogKiAKICogXHBhcmFtIFtpbl0gZW5nYXJyYXkgVGhlIGFycmF5IG9mIGRldmljZXMgdG8g
+dXNlLgogKiBccGFyYW0gW2luLG91dF0gaW50ZXJmYWNlX2FjdGlvbnMgVGhlIGFycmF5IG9mIGFj
+dGlvbnMgdG8gcnVuLgogKgogKiBSdW4gdGhlIGFycmF5IG9mIGFjdGlvbnMgb24gdGhlIGFycmF5
+IG9mIGVuZ2luZXMuICBUaGUgbGVuZ3RoIG9mIGludGVyZmFjZV9hY3Rpb25zCiAqIG11c3QgbWF0
+Y2ggdGhlIHNpemUgb2YgZW5nYXJyYXkuCiAqLwp2b2lkIEdhdXNzaWFuQmFja1N1YnN0aXR1dGlv
+bl9ydW5fYXJyYXkobWF4X2VuZ2FycmF5X3QgKmVuZ2FycmF5LCBHYXVzc2lhbkJhY2tTdWJzdGl0
+dXRpb25fYWN0aW9uc190ICppbnRlcmZhY2VfYWN0aW9uc1tdKQp7CgltYXhfcnVuX3QgKnJ1biA9
+IEdhdXNzaWFuQmFja1N1YnN0aXR1dGlvbl9ydW5fYXJyYXlfbm9uYmxvY2soZW5nYXJyYXksIGlu
+dGVyZmFjZV9hY3Rpb25zKTsKCUNIRUNLX05VTEwocnVuLCAiVW5hYmxlIHRvIHJ1biBhY3Rpb25z
+IiwgKTsKCW1heF93YWl0KHJ1bik7Cn0KCgovKioKICogXGJyaWVmIEFycmF5IHJ1biBhZHZhbmNl
+ZCBzdGF0aWMgbm9uLWJsb2NraW5nIGZ1bmN0aW9uIGZvciB0aGUgaW50ZXJmYWNlICdkZWZhdWx0
+Jy4KICogCiAqCiAqIFNjaGVkdWxlIHRvIHJ1biB0aGUgYXJyYXkgb2YgYWN0aW9ucyBvbiB0aGUg
+YXJyYXkgb2YgZW5naW5lcywgYW5kIHJldHVybiBpbW1lZGlhdGVseS4KICogVGhlIGxlbmd0aCBv
+ZiBpbnRlcmZhY2VfYWN0aW9ucyBtdXN0IG1hdGNoIHRoZSBzaXplIG9mIGVuZ2FycmF5LgogKiBU
+aGUgc3RhdHVzIG9mIHRoZSBydW4gY2FuIGJlIGNoZWNrZWQgZWl0aGVyIGJ5IDo6bWF4X3dhaXQg
+b3IgOjptYXhfbm93YWl0OwogKiBub3RlIHRoYXQgb25lIG9mIHRoZXNlICptdXN0KiBiZSBjYWxs
+ZWQsIHNvIHRoYXQgYXNzb2NpYXRlZCBtZW1vcnkgY2FuIGJlIHJlbGVhc2VkLgogKgogKiBccGFy
+YW0gW2luXSBlbmdhcnJheSBUaGUgYXJyYXkgb2YgZGV2aWNlcyB0byB1c2UuCiAqIFxwYXJhbSBb
+aW5dIGludGVyZmFjZV9hY3Rpb25zIFRoZSBhcnJheSBvZiBhY3Rpb25zIHRvIHJ1bi4KICogXHJl
+dHVybiBBIGhhbmRsZSBvbiB0aGUgZXhlY3V0aW9uIHN0YXR1cyBvZiB0aGUgYWN0aW9ucywgb3Ig
+TlVMTCBpbiBjYXNlIG9mIGVycm9yLgogKi8KbWF4X3J1bl90ICpHYXVzc2lhbkJhY2tTdWJzdGl0
+dXRpb25fcnVuX2FycmF5X25vbmJsb2NrKG1heF9lbmdhcnJheV90ICplbmdhcnJheSwgR2F1c3Np
+YW5CYWNrU3Vic3RpdHV0aW9uX2FjdGlvbnNfdCAqaW50ZXJmYWNlX2FjdGlvbnNbXSkKewoJbWF4
+X2ZpbGVfdCAqbWF4ZmlsZSA9IG1heF9lbmdhcnJheV9nZXRfbWF4X2ZpbGUoZW5nYXJyYXksIDAp
+OwoJaW50IGk7CgltYXhfYWN0YXJyYXlfdCAqYWN0YXJyYXkgPSBtYXhfYWN0YXJyYXlfaW5pdCht
+YXhmaWxlLCBlbmdhcnJheS0+c2l6ZSk7CglpZiAoYWN0YXJyYXkgPT0gTlVMTCkgcmV0dXJuIE5V
+TEw7CgltYXhfYWN0aW9uc190ICoqYXJyX2FjdGlvbnMgPSBtYWxsb2MoZW5nYXJyYXktPnNpemUg
+KiBzaXplb2YobWF4X2FjdGlvbnNfdCopKTsKCWZvciAoIGkgPSAwIDsgaSA8IGFjdGFycmF5LT5z
+aXplOyBpKysgKSB7CgkJbWF4X2FjdGlvbnNfdCAqYWN0aW9ucyA9IEdhdXNzaWFuQmFja1N1YnN0
+aXR1dGlvbl9jb252ZXJ0X2ludGVybmFsKG1heGZpbGUsIGludGVyZmFjZV9hY3Rpb25zW2ldLCAx
+LCBOVUxMLCBOVUxMKTsKCQlpZiAoYWN0aW9ucyA9PSBOVUxMKSByZXR1cm4gTlVMTDsKCQlhcnJf
+YWN0aW9uc1tpXSA9IGFjdGlvbnM7CgkJbWF4X3NldF9hY3Rpb24oYWN0YXJyYXksIGksIGFjdGlv
+bnMpOwoJfQoJbWF4X3J1bl90ICpydW4gPSBtYXhfcnVuX2FycmF5X25vbmJsb2NrKGVuZ2FycmF5
+LCBhY3RhcnJheSk7Cglmb3IgKCBpID0gMCA7IGkgPCBhY3RhcnJheS0+c2l6ZSA7IGkrKyApIHsg
+bWF4X2FjdGlvbnNfZnJlZShhcnJfYWN0aW9uc1tpXSk7IH0KCW1heF9hY3RhcnJheV9mcmVlKGFj
+dGFycmF5KTsKCWZyZWUoYXJyX2FjdGlvbnMpOwoJcmV0dXJuIHJ1bjsKfQoKCi8qKgogKiBcYnJp
+ZWYgQ29udmVydHMgYSBzdGF0aWMtaW50ZXJmYWNlIGFjdGlvbiBzdHJ1Y3QgaW50byBhIGR5bmFt
+aWMtaW50ZXJmYWNlIG1heF9hY3Rpb25zX3Qgc3RydWN0LgogKgogKiBOb3RlIHRoYXQgdGhpcyBp
+cyBhbiBpbnRlcm5hbCB1dGlsaXR5IGZ1bmN0aW9uIHVzZWQgYnkgb3RoZXIgZnVuY3Rpb25zIGlu
+IHRoZSBzdGF0aWMgaW50ZXJmYWNlLgogKgogKiBccGFyYW0gW2luXSBtYXhmaWxlIFRoZSBtYXhm
+aWxlIHRvIHVzZS4KICogXHBhcmFtIFtpbl0gaW50ZXJmYWNlX2FjdGlvbnMgVGhlIGludGVyZmFj
+ZS1zcGVjaWZpYyBhY3Rpb25zIHRvIHJ1bi4KICogXHJldHVybiBUaGUgZHluYW1pYy1pbnRlcmZh
+Y2UgYWN0aW9ucyB0byBydW4sIG9yIE5VTEwgaW4gY2FzZSBvZiBlcnJvci4KICovCm1heF9hY3Rp
+b25zX3QqIEdhdXNzaWFuQmFja1N1YnN0aXR1dGlvbl9jb252ZXJ0KG1heF9maWxlX3QgKm1heGZp
+bGUsIEdhdXNzaWFuQmFja1N1YnN0aXR1dGlvbl9hY3Rpb25zX3QgKmludGVyZmFjZV9hY3Rpb25z
+KQp7CglyZXR1cm4gR2F1c3NpYW5CYWNrU3Vic3RpdHV0aW9uX2NvbnZlcnRfaW50ZXJuYWwobWF4
+ZmlsZSwgaW50ZXJmYWNlX2FjdGlvbnMsIDAsIE5VTEwsIE5VTEwpOwp9CgojdW5kZWYgQ0hFQ0tf
+RVJST1JTX1NUCiN1bmRlZiBDSEVDS19OVUxMCgoK
+#endif /* SLIC_B64_DEFINITIONS */
+
+#ifdef SLIC_EXTRA_FILES
+PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PHVz
+ZXJmaWxlcyBmb3JtYXQtdmVyc2lvbj0iMjAxMjAyMDAiLz4=
+#endif /* SLIC_EXTRA_FILES */
+
+#ifdef PHOTON_NODE_ADD_DATA
+#define PHOTON_NODE_ADD_DATA_PRESENT 1
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 32, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 33, "SquashFactor", 1.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 0, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 1, "SquashFactor", 1.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 2, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 3, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 4, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 11, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 12, "SquashFactor", 1.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 13, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 14, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 15, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 22, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 20, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 21, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 55, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 26, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 9, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 10, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 56, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 30, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 41, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 18, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 19, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 57, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 25, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 7, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 8, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 58, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 29, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 39, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 16, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 17, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 59, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 24, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 5, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 6, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 60, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 28, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 37, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 61, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 23, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 62, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 27, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 36, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 38, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 40, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 42, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 35, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 47, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 64, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 44, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 45, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 46, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 48, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 63, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 50, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 51, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 53, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 54, "SquashFactor", 0.0)
+PHOTON_NODE_ADD_DATA(GaussianBackSubstitutionKernel, 52, "SquashFactor", 0.0)
+#endif
+
+#ifdef MAXFILE_SIGNATURE
+#define MAXFILE_SIGNATURE_PRESENT 1
+MAXFILE_SIGNATURE("302c02141d647b7a00fe98f1c195f1e5a51a9527df97b90a0214759bfbb47fb8da7ad3d25e20e95ca93248a19e8f")
+#endif
+
